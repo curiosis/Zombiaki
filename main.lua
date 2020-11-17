@@ -2,6 +2,8 @@ function love.load()
   x = 200
   y = 200
   speed = 150
+  playerSprite = love.graphics.newImage('Sprites/Player.png')
+  success = love.window.setMode(1280, 720)
 end
 
 function love.update(dt)
@@ -18,5 +20,5 @@ function love.update(dt)
 end
 
 function love.draw()
-  love.graphics.rectangle("fill", x, y, 20, 20)
+  love.graphics.draw(playerSprite, x, y)
 end
