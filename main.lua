@@ -62,7 +62,10 @@ function love.draw()
 
   for i = 1, #zombies do
     local zombie = zombies[i].sprite
-    lg.draw(zombie.image, zombie.x, zombie.y)
+    local rotate = zombies[i].rotate(playerX, playerY)
+    lg.draw(
+      zombie.image, zombie.x, zombie.y, rotate, 1, 1,
+      zombie.width / 2, zombie.height / 2)
   end
 end
 

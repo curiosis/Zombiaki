@@ -4,6 +4,12 @@ function Zombie(_sprite)
     speed = 100
   }
 
+  -- init position
+  function self.initPosition(x, y)
+    self.sprite.x = x
+    self.sprite.y = y
+  end
+
   -- movement
   function self.move(dt, pX, pY, zombies)
     local nexX = 0
@@ -29,17 +35,16 @@ function Zombie(_sprite)
       end
     end
 
-    if canMove then
+    -- if canMove then
       self.sprite.x = newX
       self.sprite.y = newY
-    end
-
+    -- end
   end
 
   -- init position
-  function self.initPosition(x, y)
-    self.sprite.x = x
-    self.sprite.y = y
+  function self.rotate(pX, pY)
+    return math.atan2((pY - self.sprite.y), (pX - self.sprite.x))
   end
+
   return self
 end
