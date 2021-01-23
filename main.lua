@@ -30,10 +30,11 @@ function love.load()
 
   -- create Zombies and add them to the table
   zombieImg = lg.newImage('Sprites/Zombie.png')
+  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}}
   for i = 1, 4 do
     local zombieSprite = Sprite(zombieImg)
     local zombie = Zombie(zombieSprite)
-    zombie.initPosition(0, i * 150 - 150)
+    zombie.initPosition(list[i][1], list[i][2])
     table.insert(zombies, zombie)
   end
 
@@ -68,6 +69,17 @@ end
 function moveZombie(dt, pX, pY)
   for i = 1, #zombies do
     local zombie = zombies[i]
-    zombie.move(dt, pX, pY)
+    local t = copyTable(zombies, i)
+    zombie.move(dt, pX, pY, t)
   end
+end
+
+function copyTable(old, n)
+  local t = {}
+  for i = 1, #old do
+    if i ~= n then
+      table.insert(t, old[i])
+    end
+  end
+  return t
 end

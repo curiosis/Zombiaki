@@ -3,8 +3,8 @@ function Sprite (_image)
     x = 0,
     y = 0,
     image = _image,
-    width = _image.getWidth,
-    height = _image.getHeight
+    width = _image:getWidth(),
+    height = _image:getHeight()
   }
 
   -- check if this sprite is colliding with other sprite
