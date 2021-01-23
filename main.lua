@@ -4,9 +4,12 @@ local player
 local playerX
 local playerY
 local speed = 300
+local open_shop = false
 
 local background
 local background_quad
+local shop
+local shop2
 
 local windowMode
 
@@ -18,6 +21,8 @@ function love.load()
   background = lg.newImage('Sprites/Background.png')
   background:setWrap("repeat", "repeat")
   background_quad = lg.newQuad(0, 0, screenResW, screenResH, background:getWidth(), background:getHeight())
+
+  shop2 = lg.newImage('Sprites/shop2.png')
 
   playerX = love.graphics.getWidth() / 2
   playerY = love.graphics.getHeight() / 2
@@ -38,9 +43,24 @@ function love.update(dt)
   elseif love.keyboard.isDown("up",'w') then
     playerY = playerY - speed * dt
   end
+
+  if love.keyboard.isDown('q') then
+    shop_open = true
+  end
+
 end
 
 function love.draw()
   lg.draw(background, background_quad, 0, 0)
   lg.draw(player, playerX, playerY, playerRot, 1, 1, player:getWidth() / 2, player:getHeight() / 2)
+  lg.draw(shop2, 320, 550)
+  if(shop_open) then
+    shop = love.graphics.newImage('Sprites/shop.png')
+    love.graphics.draw(shop,0,0)
+  else
+    shop = nil
+  end
 end
+
+
+--SHOP
