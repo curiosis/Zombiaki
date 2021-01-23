@@ -1,4 +1,18 @@
-local lg = love.graphics
+require "mainMenu"
+
+function love.load()
+  menuLoad()
+end
+
+function love.update(dt)
+
+end
+
+function love.draw()
+  menuDraw()
+end
+
+--[[local lg = love.graphics
 
 local player
 local playerX
@@ -14,6 +28,7 @@ local screenResW = 1280
 local screenResH = 720
 local playerRot
 function love.load()
+
   player = lg.newImage('Sprites/Player.png')
   background = lg.newImage('Sprites/Background.png')
   background:setWrap("repeat", "repeat")
@@ -41,6 +56,7 @@ function love.update(dt)
 end
 
 function love.draw()
+
   lg.draw(background, background_quad, 0, 0)
   lg.draw(player, playerX, playerY, playerRot, 1, 1, player:getWidth() / 2, player:getHeight() / 2)
-end
+end]]--

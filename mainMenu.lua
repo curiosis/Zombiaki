@@ -13,9 +13,20 @@ end
 
 local buttons = {}
 local font = nil
+local mainMenuBackgroundAudio = nil
+local buttonHoverSoundEffect = nil
 
 function menuLoad()
   font = love.graphics.newFont("Fonts/Kampung_Zombie.ttf", 32)
+
+  mainMenuBackgroundAudio = love.audio.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
+  buttonHoverSoundEffect = love.audio.newSource("Audio/buttonHover.mp3", "static")
+
+  mainMenuBackgroundAudio:setVolume(0.3)
+  buttonHoverSoundEffect:setPitch(0.35)
+  buttonHoverSoundEffect:setVolume(0.4)
+
+  mainMenuBackgroundAudio:play()
 
   table.insert(buttons, newButton(
     "Start Game",
@@ -46,7 +57,7 @@ end
 function menuDraw()
 
   local ww = love.graphics.getWidth()
-  local wh = love.graphics.getHeight()
+  local wh = love.graphics.getHeight() + 150
 
   local button_width = ww * (1/3)
 
@@ -75,6 +86,7 @@ function menuDraw()
 
     button.now = love.mouse.isDown(1)
     if button.now and not button.last and hover then
+      buttonHoverSoundEffect:play()
       button.fn()
     end
 
