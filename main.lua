@@ -1,9 +1,14 @@
+require "Health"
+
 local lg = love.graphics
 
 local player
 local playerX
 local playerY
 local speed = 300
+local maxHealth = 3
+local currentHealth = maxHealth
+local health
 
 local background
 local background_quad
@@ -13,6 +18,7 @@ local windowMode
 local screenResW = 1280
 local screenResH = 720
 local playerRot
+
 function love.load()
   player = lg.newImage('Sprites/Player.png')
   background = lg.newImage('Sprites/Background.png')
@@ -22,6 +28,11 @@ function love.load()
   playerX = love.graphics.getWidth() / 2
   playerY = love.graphics.getHeight() / 2
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
+
+  health = Health(currentHealth)
+  print("currentHealth: "..currentHealth)
+  currentHealth = health.loseLife(1)
+  print("currentHealth: "..currentHealth)
 
   windowMode = love.window.setMode(screenResW, screenResH)
 end
@@ -43,4 +54,5 @@ end
 function love.draw()
   lg.draw(background, background_quad, 0, 0)
   lg.draw(player, playerX, playerY, playerRot, 1, 1, player:getWidth() / 2, player:getHeight() / 2)
+  health.drawHearts()
 end
