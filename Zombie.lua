@@ -1,7 +1,7 @@
 function Zombie(_sprite)
   local self = {
     sprite = _sprite,
-    speed = 10
+    speed = 100
   }
 
   -- movement
@@ -16,9 +16,9 @@ function Zombie(_sprite)
     end
     -- vertical movement
     if self.sprite.y <= pY then
-      newX = self.sprite.y + (self.speed * dt)
+      newY = self.sprite.y + (self.speed * dt)
     else
-      newX = self.sprite.y - (self.speed * dt)
+      newY = self.sprite.y - (self.speed * dt)
     end
 
     self.sprite.x = newX

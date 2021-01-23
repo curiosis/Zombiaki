@@ -41,6 +41,7 @@ function love.load()
 end
 
 function love.update(dt)
+  moveZombie(dt, playerX, playerY)
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
   if love.keyboard.isDown("right", 'd')  then
     playerX = playerX+speed*dt
@@ -61,5 +62,12 @@ function love.draw()
   for i = 1, #zombies do
     local zombie = zombies[i].sprite
     lg.draw(zombie.image, zombie.x, zombie.y)
+  end
+end
+
+function moveZombie(dt, pX, pY)
+  for i = 1, #zombies do
+    local zombie = zombies[i]
+    zombie.move(dt, pX, pY)
   end
 end
