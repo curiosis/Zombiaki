@@ -1,3 +1,6 @@
+require "Sprite"
+require "Zombie"
+
 local lg = love.graphics
 
 local player
@@ -13,15 +16,26 @@ local windowMode
 local screenResW = 1280
 local screenResH = 720
 local playerRot
+
+zombies = {}
+
 function love.load()
   player = lg.newImage('Sprites/Player.png')
   background = lg.newImage('Sprites/Background.png')
   background:setWrap("repeat", "repeat")
   background_quad = lg.newQuad(0, 0, screenResW, screenResH, background:getWidth(), background:getHeight())
-
   playerX = love.graphics.getWidth() / 2
   playerY = love.graphics.getHeight() / 2
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
+
+  -- create Zombies and add them to the table
+  zombieImg = lg.newImage('Sprites/Zombie.png')
+  for i = 1, 4 do
+    local zombieSprite = Sprite(zombieImg)
+    local zombie = Zombie(zombieSprite)
+    zombie.initPosition(0, i * 150 - 150)
+    table.insert(zombies, zombie)
+  end
 
   windowMode = love.window.setMode(screenResW, screenResH)
 end
@@ -43,4 +57,9 @@ end
 function love.draw()
   lg.draw(background, background_quad, 0, 0)
   lg.draw(player, playerX, playerY, playerRot, 1, 1, player:getWidth() / 2, player:getHeight() / 2)
+
+  for i = 1, #zombies do
+    local zombie = zombies[i].sprite
+    lg.draw(zombie.image, zombie.x, zombie.y)
+  end
 end

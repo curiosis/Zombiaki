@@ -1,18 +1,18 @@
-function Sprite (image)
+function Sprite (_image)
   local self = {
-    _x = x,
-    _y = y,
-    _image = image,
-    _width = image.getWidth,
-    _height = image.getHeight
+    x = x,
+    y = y,
+    image = _image,
+    width = _image.getWidth,
+    height = _image.getHeight
   }
 
   -- check if this sprite is colliding with other sprite
   function self.isCollided(sprite)
-    return sprite.x < self._x + self._width
-    and sprite.x + sprite.width > self._x
-    and sprite.y < self._y + self._height
-    and sprite.y + sprite.height > self._y
+    return sprite.x < self.x + self.width
+    and sprite.x + sprite.width > self.x
+    and sprite.y < self.y + self.height
+    and sprite.y + sprite.height > self.y
   end
-
+  return self
 end
