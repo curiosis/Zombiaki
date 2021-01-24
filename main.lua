@@ -9,6 +9,7 @@ local shop
 local shop2
 local coin
 monets = 0
+alert = false
 
 function love.load()
     menuLoad()
@@ -33,14 +34,12 @@ function love.draw()
     startDraw()
     lg.draw(shop2, 320, 550)
     lg.draw(coin, 1210,12)
-    love.graphics.print(monets,1150,20)
     lg.print(monets,1150,20)
+    lg.print(alert,10,500)
 
     if(shop_open) then
-      love.graphics.draw(shop,0,0)
       lg.draw(shop,0,0)
     else
-      love.graphics.draw(shop,1500,0)
       lg.draw(shop,1500,0)
     end
   else
