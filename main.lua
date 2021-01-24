@@ -1,7 +1,12 @@
 require "mainMenu"
+require "TiledMap"
+
+_G.about = false
+_G.start = false
 
 function love.load()
   menuLoad()
+  loadMap()
 end
 
 function love.update(dt)
@@ -9,8 +14,14 @@ function love.update(dt)
 end
 
 function love.draw()
-  menuDraw()
+  if not start then
+    menuDraw()
+  else
+    map:draw()
+  end
 end
+
+
 
 --[[local lg = love.graphics
 
