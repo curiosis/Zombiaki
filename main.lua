@@ -1,6 +1,7 @@
 require "Health"
 require "Sprite"
 require "Zombie"
+require "Injure"
 
 local lg = love.graphics
 
@@ -18,6 +19,7 @@ local windowMode
 local screenResW = 1280
 local screenResH = 720
 local playerRot
+local injure
 
 zombies = {}
 currentHealth = maxHealth
@@ -45,9 +47,9 @@ function love.load()
 end
 
 function love.update(dt)
-  touchZombie()
   moveZombie(dt, playerX, playerY)
-
+  injure = Injure(player, playerX, playerY)
+  injure.touchZombie()
   print(currentHealth)
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
   if love.keyboard.isDown("right", 'd')  then
@@ -75,21 +77,6 @@ function love.draw()
   end
 
   health.drawHearts()
-end
-
-function touchZombie()
-  for i=1, #zombies do
-    local zombie = zombies[i].sprite
-    if isInjured(playerX, playerY, player:getWidth(), player:getHeight(), zombie) then
-      currentHealth = health.loseLife(1)
-    end
-  end
-end
-
-function isInjured(pX, pY, width, height, zombie)
-  print("pX: "..pX.." pY: "..pY.." x: "..zombie.x.." y: "..zombie.y)
-  return math.abs(pX - zombie.x) < 10
-  and math.abs(pY - zombie.y) < 10
 end
 
 function moveZombie(dt, pX, pY)
