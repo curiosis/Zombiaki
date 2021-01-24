@@ -14,8 +14,8 @@ player = {
 
 function player:direction()
   return math.atan2(
-    (M.getY() - player.y/(getWidthMap()/camera.resW)),
-    (M.getX() - player.x/(getHeightMap()/camera.resH))
+    (M.getY() - player.y/(getHeightMap()/camera.resH)),
+    (M.getX() - player.x/(getWidthMap()/camera.resW))
   )
 end
 
