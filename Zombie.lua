@@ -13,7 +13,7 @@ function Zombie(_sprite)
 
   -- movement
   function self.move(dt, pX, pY, zombies)
-    local nexX = 0
+    local newX = 0
     local newY = 0
     -- horizontal movement
     if self.sprite.x <= pX then

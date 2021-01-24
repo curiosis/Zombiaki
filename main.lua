@@ -2,6 +2,7 @@ require "Health"
 require "Sprite"
 require "Zombie"
 require "Injure"
+require "Bullet"
 
 local lg = love.graphics
 
@@ -21,6 +22,7 @@ local screenResH = 720
 local playerRot
 local injure
 
+bullets = {}
 zombies = {}
 currentHealth = maxHealth
 health = Health()
@@ -36,12 +38,14 @@ function love.load()
   lg.setNewFont(20)
   zombieImg = lg.newImage('Sprites/Zombie.png')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
-  for i = 1, 10 do
+  for i = 1, 1 do
     local zombieSprite = Sprite(zombieImg)
     local zombie = Zombie(zombieSprite)
     zombie.initPosition(list[i][1], list[i][2])
     table.insert(zombies, zombie)
   end
+
+  bulletImg = lg.newImage('Sprites/Bullet.jpg')
 
   windowMode = love.window.setMode(screenResW, screenResH)
 end
@@ -62,6 +66,17 @@ function love.update(dt)
   elseif love.keyboard.isDown("up",'w') then
     playerY = playerY - speed * dt
   end
+
+  if love.keyboard.isDown("space") then
+    local bulletSprite = Sprite(bulletImg)
+    local bullet = Bullet(bulletSprite)
+    bullet.initPosition(playerX, playerY)
+    table.insert(bullets, bullet)
+  end
+
+  for i = 1, #bullets do
+    bullets[i].move(dt)
+  end
 end
 
 function love.draw()
@@ -74,6 +89,11 @@ function love.draw()
     lg.draw(
       zombie.image, zombie.x, zombie.y, rotate, 1, 1,
       zombie.width / 2, zombie.height / 2)
+  end
+
+  for i = 1, #bullets do
+    local bullet = bullets[i]
+    lg.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
   end
 
   health.drawHearts()
