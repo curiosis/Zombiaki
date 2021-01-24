@@ -170,7 +170,7 @@ function startDraw()
   end
 
   drawFog()
-  health.drawHearts()
+  
   camera:unset()
 end
 

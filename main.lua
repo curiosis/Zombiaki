@@ -32,6 +32,7 @@ end
 function love.draw()
   if start then
     startDraw()
+    health.drawHearts()
     lg.draw(shop2, 320, 550)
     lg.draw(coin, 1210,12)
     lg.print(monets,1150,20)
