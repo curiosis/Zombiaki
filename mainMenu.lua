@@ -1,3 +1,5 @@
+require "TiledMap"
+
 BUTTON_HEIGHT = 64
 
 local
@@ -31,13 +33,13 @@ function menuLoad()
   table.insert(buttons, newButton(
     "Start Game",
     function()
-      print("Starting Game")
+      start = true
     end))
 
   table.insert(buttons, newButton(
     "About",
     function()
-      print("About page")
+      about = true
     end))
 
   table.insert(buttons, newButton(
@@ -93,6 +95,7 @@ function menuDraw()
     love.graphics.setColor(unpack(color))
     love.graphics.rectangle("fill",bx,by,button_width, BUTTON_HEIGHT)
 
+
     love.graphics.setColor(0, 0, 0, 1)
 
     local textW = font:getWidth(button.text)
@@ -108,4 +111,5 @@ function menuDraw()
     cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
 
   end
+  love.graphics.setColor(1, 1, 1, 1)
 end
