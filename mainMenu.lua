@@ -1,7 +1,32 @@
 require "TiledMap"
 require "camera"
 require "player"
+require "Health"
+require "Sprite"
+require "Zombie"
+require "Injure"
 
+
+-- local player
+local playerX
+local playerY
+local speed = 300
+local maxHealth = 10
+
+local background
+local background_quad
+
+local windowMode
+local G = love.graphics
+
+local screenResW = 1280
+local screenResH = 720
+local playerRot
+local injure
+
+zombies = {}
+currentHealth = maxHealth
+health = Health()
 BUTTON_HEIGHT = 64
 
 _G.about = false
@@ -24,7 +49,7 @@ local mainMenuBackgroundAudio = nil
 local buttonHoverSoundEffect = nil
 
 function menuLoad()
-  font = love.graphics.newFont("Fonts/Kampung_Zombie.ttf", 32)
+  font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
   mainMenuBackgroundAudio = love.audio.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
   buttonHoverSoundEffect = love.audio.newSource("Audio/buttonHover.mp3", "static")
@@ -119,14 +144,57 @@ function menuDraw()
   love.graphics.setColor(1, 1, 1, 1)
 end
 
+function startLoad()
+  print("start")
+  zombieImg = G.newImage('Sprites/Zombie.png')
+  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
+  for i = 1, 10 do
+      local zombieSprite = Sprite(zombieImg)
+      local zombie = Zombie(zombieSprite)
+      zombie.initPosition(list[i][1], list[i][2])
+      table.insert(zombies, zombie)
+  end
+end
+
 function startDraw()
   camera:set()
   _G.map:draw()
   player:draw()
+
+  for i = 1, #zombies do
+    local zombie = zombies[i].sprite
+    local rotate = zombies[i].rotate(player.x, player.y)
+    G.draw(
+      zombie.image, zombie.x, zombie.y, rotate, 1, 1,
+      zombie.width / 2, zombie.height / 2)
+  end
+
   drawFog()
+  health.drawHearts()
   camera:unset()
 end
 
 function startUpdate(dt)
   player:update(dt)
+  moveZombie(dt, player.x, player.y)
+  injure = Injure(player, player.x, player.y)
+  injure.touchZombie()
+end
+
+function moveZombie(dt, pX, pY)
+  for i = 1, #zombies do
+    local zombie = zombies[i]
+    local t = copyTable(zombies, i)
+    zombie.move(dt, pX, pY, t)
+  end
+end
+
+function copyTable(old, n)
+  local t = {}
+  for i = 1, #old do
+    if i ~= n then
+      table.insert(t, old[i])
+    end
+  end
+  return t
 end
