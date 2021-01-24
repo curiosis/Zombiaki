@@ -1,9 +1,12 @@
+_G.pix = 56
+
 function loadMap(path)
   local map = require(path)
   map.quads = {}
 
   local tileset = map.tilesets[1]
   map.tileset = tileset
+
   map.image = love.graphics.newImage("Map/Tileset.png")
 
   for y=0, (tileset.imageheight / tileset.tileheight) - 1 do
@@ -44,4 +47,12 @@ function loadMap(path)
     end
   end
   return map
+end
+
+function getWidthMap()
+  return 30*pix
+end
+
+function getHeightMap()
+  return 20*pix
 end
