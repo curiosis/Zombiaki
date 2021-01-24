@@ -9,7 +9,7 @@ local shop
 local shop2
 local coin
 monets = 0
-alert = false
+alert = ""
 
 function love.load()
     menuLoad()
