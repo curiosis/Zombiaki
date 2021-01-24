@@ -16,8 +16,6 @@ function Bullet (_sprite)
 
   -- movement
   function self.move(dt)
-
-
     local dx = self.speed * dt * math.cos(self.dir)
     local dy = self.speed * dt * math.sin(self.dir)
 

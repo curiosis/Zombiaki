@@ -5,7 +5,7 @@ require "Health"
 require "Sprite"
 require "Zombie"
 require "Injure"
-
+require "Bullet"
 
 -- local player
 local playerX
@@ -24,6 +24,7 @@ local screenResH = 720
 local playerRot
 local injure
 
+bullets = {}
 zombies = {}
 currentHealth = maxHealth
 health = Health()
@@ -145,7 +146,6 @@ function menuDraw()
 end
 
 function startLoad()
-  print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
   for i = 1, 10 do
@@ -154,6 +154,8 @@ function startLoad()
       zombie.initPosition(list[i][1], list[i][2])
       table.insert(zombies, zombie)
   end
+
+  bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
 function startDraw()
@@ -169,6 +171,11 @@ function startDraw()
       zombie.width / 2, zombie.height / 2)
   end
 
+  for i = 1, #bullets do
+    local bullet = bullets[i]
+    G.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
+  end
+
   drawFog()
   health.drawHearts()
   camera:unset()
@@ -179,6 +186,7 @@ function startUpdate(dt)
   moveZombie(dt, player.x, player.y)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
+  moveBullets(dt)
 end
 
 function moveZombie(dt, pX, pY)
@@ -197,4 +205,17 @@ function copyTable(old, n)
     end
   end
   return t
+end
+
+function moveBullets(dt)
+  if love.keyboard.isDown("space") then
+    local bulletSprite = Sprite(bulletImg)
+    local bullet = Bullet(bulletSprite)
+    bullet.initPosition(player.x, player.y)
+    table.insert(bullets, bullet)
+  end
+
+  for i = 1, #bullets do
+    bullets[i].move(dt)
+  end
 end
