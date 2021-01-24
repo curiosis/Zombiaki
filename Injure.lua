@@ -7,10 +7,12 @@ function Injure(_player, _playerX, _playerY)
 
   -- player loses life if get injured
   function self.touchZombie()
-    for i=1, #zombies do
+    for i = 1, #zombies do
       local zombie = zombies[i].sprite
       if isInjured(zombie) then
         currentHealth = health.loseLife(1)
+        zombies[i].speed = 0
+        zombie.x = 2000
       end
     end
   end

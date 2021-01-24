@@ -27,18 +27,8 @@ function Zombie(_sprite)
       newY = self.sprite.y - (self.speed * dt)
     end
 
-    local canMove = true
-    for i = 1, #zombies do
-      local zombie = zombies[i].sprite
-      if self.sprite.isCollided(zombie) then
-        canMove = false
-      end
-    end
-
-    -- if canMove then
       self.sprite.x = newX
       self.sprite.y = newY
-    -- end
   end
 
   -- init position
