@@ -8,9 +8,7 @@ local player
 local playerX
 local playerY
 local speed = 300
-local maxHealth = 3
-local currentHealth = maxHealth
-local health
+local maxHealth = 10
 
 local background
 local background_quad
@@ -22,6 +20,8 @@ local screenResH = 720
 local playerRot
 
 zombies = {}
+currentHealth = maxHealth
+health = Health()
 
 function love.load()
   player = lg.newImage('Sprites/Player.png')
@@ -32,11 +32,6 @@ function love.load()
   playerY = love.graphics.getHeight() / 2
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
 
-  health = Health(currentHealth)
-  print("currentHealth: "..currentHealth)
-  currentHealth = health.loseLife(1)
-  print("currentHealth: "..currentHealth)
-  -- create Zombies and add them to the table
   zombieImg = lg.newImage('Sprites/Zombie.png')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}}
   for i = 1, 4 do
@@ -50,7 +45,10 @@ function love.load()
 end
 
 function love.update(dt)
+  touchZombie()
   moveZombie(dt, playerX, playerY)
+
+  print(currentHealth)
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
   if love.keyboard.isDown("right", 'd')  then
     playerX = playerX+speed*dt
@@ -67,7 +65,6 @@ end
 function love.draw()
   lg.draw(background, background_quad, 0, 0)
   lg.draw(player, playerX, playerY, playerRot, 1, 1, player:getWidth() / 2, player:getHeight() / 2)
-  health.drawHearts()
 
   for i = 1, #zombies do
     local zombie = zombies[i].sprite
@@ -76,6 +73,23 @@ function love.draw()
       zombie.image, zombie.x, zombie.y, rotate, 1, 1,
       zombie.width / 2, zombie.height / 2)
   end
+
+  health.drawHearts()
+end
+
+function touchZombie()
+  for i=1, #zombies do
+    local zombie = zombies[i].sprite
+    if isInjured(playerX, playerY, player:getWidth(), player:getHeight(), zombie) then
+      currentHealth = health.loseLife(1)
+    end
+  end
+end
+
+function isInjured(pX, pY, width, height, zombie)
+  print("pX: "..pX.." pY: "..pY.." x: "..zombie.x.." y: "..zombie.y)
+  return math.abs(pX - zombie.x) < 10
+  and math.abs(pY - zombie.y) < 10
 end
 
 function moveZombie(dt, pX, pY)
