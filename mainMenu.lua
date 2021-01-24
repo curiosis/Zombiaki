@@ -123,6 +123,7 @@ function startDraw()
   camera:set()
   _G.map:draw()
   player:draw()
+  drawFog()
   camera:unset()
 end
 

@@ -1,5 +1,8 @@
 _G.pix = 56
 
+local fog1 = love.graphics.newImage("Sprites/fog_01.png")
+local fog2 = love.graphics.newImage("Sprites/fog_01.png")
+
 function loadMap(path)
   local map = require(path)
   map.quads = {}
@@ -47,6 +50,24 @@ function loadMap(path)
     end
   end
   return map
+end
+
+function drawFog()
+  love.graphics.draw(
+    fog1,
+    100,
+    50
+  )
+  love.graphics.draw(
+    fog2,
+    500,
+    0
+  )
+  love.graphics.draw(
+    fog2,
+    800,
+    450
+  )
 end
 
 function getWidthMap()
