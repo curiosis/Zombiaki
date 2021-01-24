@@ -1,7 +1,8 @@
 function Zombie(_sprite)
   local self = {
     sprite = _sprite,
-    speed = 100
+    speed = 100,
+    hp = 100
   }
 
   -- init position

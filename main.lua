@@ -30,13 +30,13 @@ function love.load()
   background = lg.newImage('Sprites/Background.png')
   background:setWrap("repeat", "repeat")
   background_quad = lg.newQuad(0, 0, screenResW, screenResH, background:getWidth(), background:getHeight())
-  playerX = love.graphics.getWidth() / 2
-  playerY = love.graphics.getHeight() / 2
+  playerX = lg.getWidth() / 2
+  playerY = lg.getHeight() / 2
   playerRot = math.atan2((love.mouse.getY() - playerY), (love.mouse.getX() - playerX))
-
+  lg.setNewFont(20)
   zombieImg = lg.newImage('Sprites/Zombie.png')
-  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}}
-  for i = 1, 4 do
+  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
+  for i = 1, 10 do
     local zombieSprite = Sprite(zombieImg)
     local zombie = Zombie(zombieSprite)
     zombie.initPosition(list[i][1], list[i][2])
@@ -77,6 +77,9 @@ function love.draw()
   end
 
   health.drawHearts()
+  local stats = lg.getStats(10)
+  local str = string.format("Estimated amount of texture memory used: %.2f MB", stats.texturememory / 1024 / 1024)
+  lg.print(str, 10, 10)
 end
 
 function moveZombie(dt, pX, pY)
