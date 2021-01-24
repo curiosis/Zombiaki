@@ -39,10 +39,10 @@ end
 
 function player:move(dt)
   local speedDT = self.speed * dt
-  if K.isDown("right", 'd')  then self.x = self.x + speedDT
-  elseif K.isDown("left",'a') then self.x = self.x - speedDT end
-  if K.isDown("down",'s') then self.y = self.y + speedDT
-  elseif K.isDown("up",'w') then self.y = self.y - speedDT end
+  if K.isDown("right", 'd') and self.x < 1626  then self.x = self.x + speedDT
+  elseif K.isDown("left",'a') and self.x > 56 then self.x = self.x - speedDT end
+  if K.isDown("down",'s') and self.y < 839 then self.y = self.y + speedDT
+  elseif K.isDown("up",'w') and self.y > 56 then self.y = self.y - speedDT end
 end
 
 function player:camera()
