@@ -34,6 +34,7 @@ function menuLoad()
     "Start Game",
     function()
       start = true
+      _G.map = loadMap("Map/map")
     end))
 
   table.insert(buttons, newButton(
@@ -53,7 +54,6 @@ function menuLoad()
     function()
       love.event.quit(0)
     end))
-
 end
 
 function menuDraw()

@@ -6,7 +6,6 @@ _G.start = false
 
 function love.load()
   menuLoad()
-  loadMap()
 end
 
 function love.update(dt)
@@ -16,8 +15,8 @@ end
 function love.draw()
   if not start then
     menuDraw()
-  else
-    map:draw()
+  elseif start then
+    _G.map:draw()
   end
 end
 
