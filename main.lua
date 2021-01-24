@@ -1,22 +1,23 @@
 require "mainMenu"
 require "TiledMap"
 
-_G.about = false
-_G.start = false
+
 
 function love.load()
   menuLoad()
 end
 
 function love.update(dt)
-
+  if start then
+    startUpdate(dt)
+  end
 end
 
 function love.draw()
-  if not start then
+  if start then
+    startDraw()
+  else
     menuDraw()
-  elseif start then
-    _G.map:draw()
   end
 end
 

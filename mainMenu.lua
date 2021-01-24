@@ -1,6 +1,11 @@
 require "TiledMap"
+require "camera"
+require "player"
 
 BUTTON_HEIGHT = 64
+
+_G.about = false
+_G.start = false
 
 local
 function newButton(text, fn)
@@ -33,8 +38,8 @@ function menuLoad()
   table.insert(buttons, newButton(
     "Start Game",
     function()
-      start = true
       _G.map = loadMap("Map/map")
+      start = true
     end))
 
   table.insert(buttons, newButton(
@@ -112,4 +117,15 @@ function menuDraw()
 
   end
   love.graphics.setColor(1, 1, 1, 1)
+end
+
+function startDraw()
+  camera:set()
+  _G.map:draw()
+  player:draw()
+  camera:unset()
+end
+
+function startUpdate(dt)
+  player:update(dt)
 end

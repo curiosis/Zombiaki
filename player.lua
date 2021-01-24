@@ -22,9 +22,6 @@ end
 function player:update(dt)
   self:move(dt)
   self:camera()
-  print(M.getY() - player.y)
-  print(M.getX() - player.x)
-  print(player:direction())
 end
 
 function player:draw()
