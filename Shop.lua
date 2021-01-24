@@ -1,3 +1,5 @@
+require "Health"
+
 function Shop()
   local self={
     open_shop = false
@@ -20,9 +22,12 @@ function self.keys()
 
   if love.keyboard.isDown('1') then
     function love.keyreleased(key)
-      if key == "1" and monets >= 200 then
-        -- +1 serduszko dodac
+      if key == "1" and monets >= 200 and health.current < 3 then
+        health.addLife()
         monets = monets - 200
+        print(health.current)
+      else
+        alert = "You have too much HP"
       end
     end
   end
