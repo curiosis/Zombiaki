@@ -13,6 +13,7 @@ monets = 0
 alert = ""
 local waveString = "Wave: "
 local killsString = "Kills: "
+local zombiesString = "Zombies: "
 
 function love.load()
     menuLoad()
@@ -41,6 +42,7 @@ function love.draw()
     lg.setNewFont(28)
     lg.print(monets, 1150, 20)
     lg.print(alert, 10, 500)
+    lg.print(zombiesString .. #zombies, 900, 20)
     lg.setNewFont(40)
     lg.print(waveString .. wave.currentWave, 1000, 650)
     lg.print(killsString .. kills, 50, 650)
