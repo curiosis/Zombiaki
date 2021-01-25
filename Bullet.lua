@@ -7,17 +7,24 @@ function Bullet (_sprite)
   }
 
   -- init position
-  function self.initPosition()
-    self.sprite.x = player.x
-    self.sprite.y = player.y
+  function self.initPosition(sprite, isZombie)
+    self.sprite.x = sprite.x
+    self.sprite.y = sprite.y
 
+    -- if player shots
     local mX = love.mouse.getX() + camera.x
     local mY = love.mouse.getY() + camera.y
 
-    self.dir = math.atan2(mY - player.y, mX - player.x)
+    -- if zombie shots
+    if isZombie then
+      mX = player.x
+      mY = player.y
+    end
 
-    self.x = mX - player.x
-    self.y = mY - player.y
+    self.dir = math.atan2(mY - sprite.y, mX - sprite.x)
+
+    self.x = mX - sprite.x
+    self.y = mY - sprite.y
   end
 
   -- movement
@@ -60,7 +67,7 @@ function shot(dt)
     Bullet().playSoundEffectShot()
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
-    bullet.initPosition()
+    bullet.initPosition(player)
     table.insert(bullets, bullet)
     lastShotTime = love.timer.getTime()
   end
@@ -88,9 +95,9 @@ function shooting()
   end
 end
 
-function isHit(bullet, zombie)
-  return math.abs(bullet.x - zombie.x) < 50
-  and math.abs(bullet.y - zombie.y) < 50
+function isHit(bullet, sprite)
+  return math.abs(bullet.x - sprite.x) < 50
+  and math.abs(bullet.y - sprite.y) < 50
 end
 
 function bulletIsOut(bullet)
