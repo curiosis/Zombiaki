@@ -28,7 +28,7 @@ local injure
 bullets = {}
 zombies = {}
 MAX_WAVES = 2
-currentWave = 1
+wave = Wave()
 lastShotTime = 0
 currentHealth = maxHealth
 health = Health()
@@ -210,5 +210,5 @@ function startUpdate(dt)
   injure.touchZombie()
   shot(dt)
   shooting()
-  Wave().start()
+  wave.start()
 end

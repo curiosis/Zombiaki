@@ -1,20 +1,19 @@
 function Wave()
-  local self = {}
+  local self = {
+    currentWave = 0
+  }
 
   function self.start()
-    if currentWave <= MAX_WAVES then
+    if self.currentWave < MAX_WAVES then
       if #zombies == 0 then
+        self.currentWave = self.currentWave + 1
         self.newWave()
       end
     end
-    return
   end
 
   function self.newWave()
-
-    currentWave = currentWave + 1
     spawnZombies(3, zombieImg, 100, 100, 0)
-    return
   end
 
   return self

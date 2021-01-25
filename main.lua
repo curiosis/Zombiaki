@@ -11,6 +11,7 @@ local coin
 local lastAlertTime = 0
 monets = 0
 alert = ""
+local waveString = "Wave: "
 
 function love.load()
     menuLoad()
@@ -35,9 +36,12 @@ function love.draw()
     startDraw()
     health.drawHearts()
     lg.draw(shop2, 320, 550)
-    lg.draw(coin, 1210,12)
-    lg.print(monets,1150,20)
-    lg.print(alert,10,500)
+    lg.draw(coin, 1210, 12)
+    lg.setNewFont(28)
+    lg.print(monets, 1150, 20)
+    lg.print(alert, 10, 500)
+    lg.setNewFont(40)
+    lg.print(waveString .. wave.currentWave, 1100, 650)
 
     alertResult = (love.timer.getTime() - lastAlertTime) * 1000
     if alertResult >= 2000 then
