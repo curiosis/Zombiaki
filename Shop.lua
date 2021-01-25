@@ -25,7 +25,6 @@ function self.keys()
       if key == "1" and monets >= 200 and health.current < 3 then
         health.addLife()
         monets = monets - 200
-        print(health.current)
       elseif key == "1" and health.current >= 3 then
         alert = "You have too much HP"
       elseif key == "1" and monets < 200 then
