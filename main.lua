@@ -9,6 +9,8 @@ local shop
 local shop2
 local coin
 local lastAlertTime = 0
+isAlive = true
+isWinner = false
 monets = 0
 alert = ""
 
@@ -50,6 +52,16 @@ function love.draw()
     else
       lg.draw(shop,1500,0)
     end
+
+    if not isAlive and not isWinner then
+      gameOverDraw()
+      if love.keyboard.isDown('space') then
+        print("space")
+        menuDraw()
+        break
+      end
+    end
+
   elseif about then
     menuDraw()
     aboutDraw()

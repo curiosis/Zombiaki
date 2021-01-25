@@ -209,8 +209,10 @@ function startDraw()
 end
 
 function gameOverDraw()
-
+  backgroundGameOver = love.graphics.newImage('Sprites/gameover.png')
+  love.graphics.draw(backgroundGameOver,0,0)
 end
+
 function startUpdate(dt)
   player:update(dt)
   moveZombie(dt, player.x, player.y)
