@@ -5,6 +5,10 @@ function Shop()
     open_shop = false
   }
 
+function self.addMonets()
+  monets = monets + 10
+end
+
 function self.keys()
   if love.keyboard.isDown('q') then
     shop_open = true
