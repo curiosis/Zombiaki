@@ -49,6 +49,8 @@ local font = nil
 local mainMenuBackgroundAudio = nil
 local buttonHoverSoundEffect = nil
 
+local lastShotTime = 0
+
 function menuLoad()
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
@@ -208,11 +210,13 @@ function copyTable(old, n)
 end
 
 function moveBullets(dt)
-  if love.mouse.isDown(1) then
+  local timeOut = (love.timer.getTime() - lastShotTime) * 1000
+  if love.mouse.isDown(1) and timeOut >= 500 then
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition()
     table.insert(bullets, bullet)
+    lastShotTime = love.timer.getTime()
   end
 
   for i = 1, #bullets do
