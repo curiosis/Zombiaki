@@ -27,7 +27,7 @@ local injure
 
 bullets = {}
 zombies = {}
-MAX_WAVES = 2
+MAX_WAVES = 10
 wave = Wave()
 lastShotTime = 0
 currentHealth = maxHealth
@@ -176,7 +176,7 @@ end
 
 function startLoad()
   print("start")
-  zombieImg = G.newImage('Sprites/Zombie.png')
+  defaultZombieImg = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
