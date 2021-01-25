@@ -26,13 +26,11 @@ function Health()
       self.die()
     end
 
-    function self.addLife()
-      if self.current < 3 then
-        self.current = self.current + 1
-      end
-    end
-
     return self.current
+  end
+
+  function self.addLife()
+      self.current = self.current + 1
   end
 
   function self.die()
