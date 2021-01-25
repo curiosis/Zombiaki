@@ -146,7 +146,7 @@ function zombieShooting()
         local bullet = zombie.bullets[j]
         if isHit(bullet.sprite, player, true) then
           bullet.isVisible = false
-          print("player get shot")
+          currentHealth = health.loseLife(1)
           break
         end
       end
