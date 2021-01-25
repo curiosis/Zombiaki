@@ -176,13 +176,8 @@ function startLoad()
   print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
-  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
-  for i = 1, 10 do
-      local zombieSprite = Sprite(zombieImg)
-      local zombie = Zombie(zombieSprite)
-      zombie.initPosition(list[i][1], list[i][2])
-      table.insert(zombies, zombie)
-  end
+
+  spawnZombies(10, zombieImg, 100, 100)
 end
 
 function startDraw()

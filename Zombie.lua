@@ -1,8 +1,8 @@
-function Zombie(_sprite)
+function Zombie(_sprite, _speed, _HP)
   local self = {
     sprite = _sprite,
-    speed = 100,
-    HP = 100,
+    speed = _speed,
+    HP = _HP,
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
@@ -80,4 +80,29 @@ function copyTable(old, n)
     end
   end
   return t
+end
+
+-- spawn zombies
+function spawnZombies(count, image, speed, HP)
+  for i = 1, count do
+      local zombieSprite = Sprite(image)
+      local zombie = Zombie(zombieSprite, speed, HP)
+      local position = randomPosition()
+      zombie.initPosition(position.x, position.y)
+      table.insert(zombies, zombie)
+  end
+end
+
+-- generate random position
+function randomPosition()
+  local self = { x, y }
+  local width = getWidthMap()
+  local r = love.math.random(0, 100) >= 50
+  if r then
+    self.x = love.math.random(width + 100, width + 500)
+  else
+    self.x = love.math.random(-500, -100)
+  end
+    self.y = love.math.random(0, getHeightMap())
+  return self
 end
