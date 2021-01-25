@@ -37,7 +37,6 @@ function Health()
 
   function self.die()
     isAlive = false
-    print("Player died")
   end
 
   return self

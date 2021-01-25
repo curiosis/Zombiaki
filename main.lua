@@ -56,9 +56,10 @@ function love.draw()
     if not isAlive and not isWinner then
       gameOverDraw()
       if love.keyboard.isDown('space') then
-        print("space")
-        menuDraw()
-        break
+        currentHealth = maxHealth
+        health = Health()
+        startLoad()
+        isAlive = true
       end
     end
 

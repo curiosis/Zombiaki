@@ -12,7 +12,6 @@ require "Bullet"
 local playerX
 local playerY
 local speed = 300
-local maxHealth = 10
 
 local background
 local background_quad
@@ -28,6 +27,7 @@ local injure
 bullets = {}
 zombies = {}
 lastShotTime = 0
+maxHealth = 10
 currentHealth = maxHealth
 health = Health()
 BUTTON_HEIGHT = 56
@@ -173,7 +173,6 @@ function aboutDraw()
 end
 
 function startLoad()
-  print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
@@ -204,7 +203,6 @@ function startDraw()
   end
 
   drawFog()
-
   camera:unset()
 end
 
