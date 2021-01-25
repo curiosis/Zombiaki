@@ -28,6 +28,7 @@ local injure
 bullets = {}
 zombies = {}
 MAX_WAVES = 2
+currentWave = 1
 lastShotTime = 0
 currentHealth = maxHealth
 health = Health()
