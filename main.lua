@@ -43,6 +43,9 @@ function love.draw()
     else
       lg.draw(shop,1500,0)
     end
+  elseif about then
+    menuDraw()
+    aboutDraw()
   else
     menuDraw()
   end
