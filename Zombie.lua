@@ -18,7 +18,7 @@ function Zombie(_sprite, _speed, _HP, _money, _canShooting)
   end
 
   -- movement
-  function self.move(dt, zombies)
+  function self.move(dt, zombies, zombie)
     local newX = 0
     local newY = 0
     -- horizontal movement
@@ -37,6 +37,13 @@ function Zombie(_sprite, _speed, _HP, _money, _canShooting)
       end
     else
       newY = self.sprite.y
+    end
+
+    if math.abs(self.sprite.x - player.x) < 500  and math.abs(self.sprite.y - player.y) then
+      if self.canShooting then
+        zombieShot(dt, zombie)
+        zombieShooting()
+      end
     end
 
     self.sprite.x = newX
@@ -77,13 +84,10 @@ end
 function moveZombie(dt)
   for i = 1, #zombies do
     local zombie = zombies[i]
-    -- print(zombie.canShooting)
-    if zombie.canShooting then
-      zombieShot(dt, zombie)
-      zombieShooting()
-    else
-      local t = copyTable(zombies, i)
-      zombie.move(dt, t)
+    local t = copyTable(zombies, i)
+    zombie.move(dt, t, zombie)
+    for j = 1, #zombie.bullets do
+      zombie.bullets[j].move(dt)
     end
   end
 end
@@ -101,11 +105,11 @@ end
 -- spawn zombies
 function spawnZombies(count, image, speed, HP, distance, money, canShooting)
   for i = 1, count do
-      local zombieSprite = Sprite(image)
-      local zombie = Zombie(zombieSprite, speed, HP, money, canShooting)
-      local position = randomPosition(distance)
-      zombie.initPosition(position.x, 200)
-      table.insert(zombies, zombie)
+    local zombieSprite = Sprite(image)
+    local zombie = Zombie(zombieSprite, speed, HP, money, canShooting)
+    local position = randomPosition(distance)
+    zombie.initPosition(position.x, position.y)
+    table.insert(zombies, zombie)
   end
 end
 
@@ -117,9 +121,9 @@ function randomPosition(d)
   if r then
     self.x = love.math.random(width + 100 + d, width + 500 + d)
   else
-    self.x = love.math.random(0, 1000)
+    self.x = love.math.random(-500 - d, -100 - d)
   end
-    self.y = love.math.random(-400, getHeightMap() - 400)
+  self.y = love.math.random(-400, getHeightMap() - 400)
   return self
 end
 
@@ -132,10 +136,6 @@ function zombieShot(dt, zombie)
     bullet.initPosition(zombie.sprite, true)
     table.insert(zombie.bullets, bullet)
     zombie.lastShotTime = love.timer.getTime()
-  end
-
-  for i = 1, #zombie.bullets do
-    zombie.bullets[i].move(dt)
   end
 end
 

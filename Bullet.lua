@@ -19,6 +19,7 @@ function Bullet (_sprite)
     if isZombie then
       mX = player.x
       mY = player.y
+      self.speed = 350
     end
 
     self.dir = math.atan2(mY - sprite.y, mX - sprite.x)

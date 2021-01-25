@@ -37,7 +37,7 @@ function Wave()
 --     spawnZombies(zombieCount - 8, defaultZombieImg, 180, 100, 1000, 10)
 
 -- SHOOTING
-    spawnZombies(10, defaultZombieImg, 80, 200, 100, 10, true)
+    spawnZombies(5, defaultZombieImg, 60, 200, 100, 10, true)
   end
 
   return self
