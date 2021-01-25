@@ -6,9 +6,10 @@ function Shop()
     open_shop = false
   }
 
-  function self.addMonets()
-    monets = monets + 10
-  end
+function self.addMonets(money)
+  monets = monets + money
+end
+
 
   function self.keys()
     if love.keyboard.isDown('q') then

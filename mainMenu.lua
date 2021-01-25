@@ -6,7 +6,7 @@ require "Sprite"
 require "Zombie"
 require "Injure"
 require "Bullet"
-
+require "Wave"
 
 -- local player
 local playerX
@@ -26,6 +26,9 @@ local injure
 
 bullets = {}
 zombies = {}
+MAX_WAVES = 10
+wave = Wave()
+kills = 0
 lastShotTime = 0
 maxHealth = 10
 currentHealth = maxHealth
@@ -173,15 +176,9 @@ function aboutDraw()
 end
 
 function startLoad()
-  zombieImg = G.newImage('Sprites/Zombie.png')
+  print("start")
+  defaultZombieImg = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
-  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
-  for i = 1, 10 do
-    local zombieSprite = Sprite(zombieImg)
-    local zombie = Zombie(zombieSprite)
-    zombie.initPosition(list[i][1], list[i][2])
-    table.insert(zombies, zombie)
-  end
 end
 
 function startDraw()
@@ -191,7 +188,7 @@ function startDraw()
 
   for i = 1, #zombies do
     local zombie = zombies[i].sprite
-    local rotate = zombies[i].rotate(player.x, player.y)
+    local rotate = zombies[i].rotate()
     G.draw(
     zombie.image, zombie.x, zombie.y, rotate, 1, 1,
     zombie.width / 2, zombie.height / 2)
@@ -213,9 +210,10 @@ end
 
 function startUpdate(dt)
   player:update(dt)
-  moveZombie(dt, player.x, player.y)
+  moveZombie(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
   shot(dt)
   shooting()
+  wave.start()
 end
