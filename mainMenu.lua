@@ -49,7 +49,7 @@ local font = nil
 local mainMenuBackgroundAudio = nil
 local buttonHoverSoundEffect = nil
 
-local lastShotTime = 0
+lastShotTime = 0
 
 function menuLoad()
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
@@ -149,8 +149,8 @@ end
 
 function startLoad()
   zombieImg = G.newImage('Sprites/Zombie.png')
-  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
-  for i = 1, 1 do
+  list = {{-200, 0}, {-500, 0}, {-100, 100}, {-100, 300}, {-100, 500}, {2000, 150}, {1600, 400}, {1800, 800}, {1700, 300}, {1800, 400}}
+  for i = 1, 10 do
       local zombieSprite = Sprite(zombieImg)
       local zombie = Zombie(zombieSprite)
       zombie.initPosition(list[i][1], list[i][2])
@@ -188,38 +188,6 @@ function startUpdate(dt)
   moveZombie(dt, player.x, player.y)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
-  moveBullets(dt)
-end
-
-function moveZombie(dt, pX, pY)
-  for i = 1, #zombies do
-    local zombie = zombies[i]
-    local t = copyTable(zombies, i)
-    zombie.move(dt, pX, pY, t)
-  end
-end
-
-function copyTable(old, n)
-  local t = {}
-  for i = 1, #old do
-    if i ~= n then
-      table.insert(t, old[i])
-    end
-  end
-  return t
-end
-
-function moveBullets(dt)
-  local timeOut = (love.timer.getTime() - lastShotTime) * 1000
-  if love.mouse.isDown(1) and timeOut >= 500 then
-    local bulletSprite = Sprite(bulletImg)
-    local bullet = Bullet(bulletSprite)
-    bullet.initPosition()
-    table.insert(bullets, bullet)
-    lastShotTime = love.timer.getTime()
-  end
-
-  for i = 1, #bullets do
-    bullets[i].move(dt)
-  end
+  shot(dt)
+  shooting()
 end

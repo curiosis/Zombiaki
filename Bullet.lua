@@ -2,9 +2,7 @@ function Bullet (_sprite)
   local self = {
     sprite = _sprite,
     speed = 500,
-    dir,
-    x, y,
-    ratio
+    isVisible = true
   }
 
   -- init position
@@ -19,7 +17,6 @@ function Bullet (_sprite)
 
     self.x = mX - player.x
     self.y = mY - player.y
-
   end
 
   -- movement
@@ -49,4 +46,42 @@ function Bullet (_sprite)
   end
 
   return self
+end
+
+function shot(dt)
+  local timeOut = (love.timer.getTime() - lastShotTime) * 1000
+  if love.mouse.isDown(1) and timeOut >= 500 then
+    local bulletSprite = Sprite(bulletImg)
+    local bullet = Bullet(bulletSprite)
+    bullet.initPosition()
+    table.insert(bullets, bullet)
+    lastShotTime = love.timer.getTime()
+  end
+
+  for i = 1, #bullets do
+    bullets[i].move(dt)
+  end
+end
+
+function shooting()
+  for i, zombie in ipairs(zombies) do
+    for j = 1, #bullets do
+      local bullet = bullets[j]
+      if isHit(bullet.sprite, zombie.sprite) then
+        table.remove(zombies, i)
+        bullet.isVisible = false
+        break
+      end
+    end
+  end
+  for j, bullet in ipairs(bullets) do
+    if not bullet.isVisible then
+      table.remove(bullets, j)
+    end
+  end
+end
+
+function isHit(bullet, zombie)
+  return math.abs(bullet.x - zombie.x) < 50
+  and math.abs(bullet.y - zombie.y) < 50
 end
