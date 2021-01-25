@@ -208,7 +208,7 @@ function copyTable(old, n)
 end
 
 function moveBullets(dt)
-  if love.keyboard.isDown("space") then
+  if love.mouse.isDown(1) then
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition()
