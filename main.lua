@@ -8,6 +8,7 @@ local lg = love.graphics
 local shop
 local shop2
 local coin
+local lastAlertTime = 0
 monets = 0
 alert = ""
 
@@ -37,6 +38,12 @@ function love.draw()
     lg.draw(coin, 1210,12)
     lg.print(monets,1150,20)
     lg.print(alert,10,500)
+
+    alertResult = (love.timer.getTime() - lastAlertTime) * 1000
+    if alertResult >= 2000 then
+      lastAlertTime = love.timer.getTime()
+      alert = ""
+    end
 
     if(shop_open) then
       lg.draw(shop,0,0)
