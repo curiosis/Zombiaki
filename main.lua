@@ -9,6 +9,8 @@ local shop
 local shop2
 local coin
 local lastAlertTime = 0
+isAlive = true
+isWinner = false
 monets = 0
 alert = ""
 local waveString = "Wave: "
@@ -16,8 +18,8 @@ local killsString = "Kills: "
 local zombiesString = "Zombies: "
 
 function love.load()
-    menuLoad()
-    startLoad()
+  menuLoad()
+  startLoad()
 
   shop = lg.newImage('Sprites/shop.png')
   shop2 = lg.newImage('Sprites/shop2.png')
@@ -58,6 +60,17 @@ function love.draw()
     else
       lg.draw(shop,1500,0)
     end
+
+    if not isAlive and not isWinner then
+      gameOverDraw()
+      if love.keyboard.isDown('space') then
+        currentHealth = maxHealth
+        health = Health()
+        startLoad()
+        isAlive = true
+      end
+    end
+
   elseif about then
     menuDraw()
     aboutDraw()

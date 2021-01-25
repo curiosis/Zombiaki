@@ -49,8 +49,8 @@ function Bullet (_sprite)
 
   -- sound effects
   function self.playSoundEffectShot()
-      self.shotSound:setVolume(0.3)
-      self.shotSound:play()
+    self.shotSound:setVolume(0.3)
+    self.shotSound:play()
   end
   return self
 end

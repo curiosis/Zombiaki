@@ -15,9 +15,9 @@ player = {
 
 function player:direction()
   return math.atan2(
-    (M.getY() - player.y/(getHeightMap()/camera.resH)),
-    (M.getX() - player.x/(getWidthMap()/camera.resW))
-  )
+  (M.getY() - player.y/(getHeightMap()/camera.resH)),
+  (M.getX() - player.x/(getWidthMap()/camera.resW))
+)
 end
 
 function player:update(dt)
@@ -27,15 +27,15 @@ end
 
 function player:draw()
   G.draw(
-    self.sprite,
-    self.x,
-    self.y,
-    self:direction(),
-    1,
-    1,
-    self.sprite:getWidth() / 2,
-    self.sprite:getHeight() / 2
-  )
+  self.sprite,
+  self.x,
+  self.y,
+  self:direction(),
+  1,
+  1,
+  self.sprite:getWidth() / 2,
+  self.sprite:getHeight() / 2
+)
 end
 
 function player:move(dt)

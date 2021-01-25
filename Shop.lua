@@ -11,6 +11,7 @@ function Shop()
     monets = monets + money
   end
 
+
   function self.keys()
     if love.keyboard.isDown('q') then
       shop_open = true
@@ -20,11 +21,10 @@ function Shop()
 
     if love.keyboard.isDown('1') then
       function love.keyreleased(key)
-        if key == "1" and monets >= 200 and health.current < 5 then
+        if key == "1" and monets >= 200 and health.current < 3 then
           health.addLife()
           monets = monets - 200
-          alert = "+1 heart"
-        elseif key == "1" and health.current >= 5 then
+        elseif key == "1" and health.current >= 3 then
           alert = "You have too much HP"
         elseif key == "1" and monets < 200 then
           alert = "Not enough coins"
