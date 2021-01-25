@@ -70,6 +70,7 @@ function shooting()
       if isHit(bullet.sprite, zombie.sprite) then
         table.remove(zombies, i)
         bullet.isVisible = false
+        monets = monets + 10
         break
       end
     end
