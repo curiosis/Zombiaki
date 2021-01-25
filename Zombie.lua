@@ -23,11 +23,16 @@ function Zombie(_sprite, _speed, _HP)
     else
       newX = self.sprite.x - (self.speed * dt)
     end
+
     -- vertical movement
-    if self.sprite.y <= player.y then
-      newY = self.sprite.y + (self.speed * dt)
+    if math.abs(self.sprite.x - player.x) < 400 then
+      if self.sprite.y <= player.y then
+        newY = self.sprite.y + (self.speed * dt)
+      else
+        newY = self.sprite.y - (self.speed * dt)
+      end
     else
-      newY = self.sprite.y - (self.speed * dt)
+      newY = self.sprite.y
     end
 
       self.sprite.x = newX
@@ -103,6 +108,6 @@ function randomPosition()
   else
     self.x = love.math.random(-500, -100)
   end
-    self.y = love.math.random(0, getHeightMap())
+    self.y = love.math.random(-200, getHeightMap() - 200)
   return self
 end
