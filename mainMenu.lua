@@ -6,7 +6,7 @@ require "Sprite"
 require "Zombie"
 require "Injure"
 require "Bullet"
-
+require "Wave"
 
 -- local player
 local playerX
@@ -27,6 +27,7 @@ local injure
 
 bullets = {}
 zombies = {}
+MAX_WAVES = 2
 lastShotTime = 0
 currentHealth = maxHealth
 health = Health()
@@ -176,8 +177,6 @@ function startLoad()
   print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
-
-  spawnZombies(10, zombieImg, 100, 100)
 end
 
 function startDraw()
@@ -210,4 +209,5 @@ function startUpdate(dt)
   injure.touchZombie()
   shot(dt)
   shooting()
+  Wave().start()
 end

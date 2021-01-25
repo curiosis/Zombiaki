@@ -88,26 +88,26 @@ function copyTable(old, n)
 end
 
 -- spawn zombies
-function spawnZombies(count, image, speed, HP)
+function spawnZombies(count, image, speed, HP, distance)
   for i = 1, count do
       local zombieSprite = Sprite(image)
       local zombie = Zombie(zombieSprite, speed, HP)
-      local position = randomPosition()
+      local position = randomPosition(distance)
       zombie.initPosition(position.x, position.y)
       table.insert(zombies, zombie)
   end
 end
 
 -- generate random position
-function randomPosition()
+function randomPosition(d)
   local self = { x, y }
   local width = getWidthMap()
   local r = love.math.random(0, 100) >= 50
   if r then
-    self.x = love.math.random(width + 100, width + 500)
+    self.x = love.math.random(width + 100 + d, width + 500 + d)
   else
-    self.x = love.math.random(-500, -100)
+    self.x = love.math.random(-500 - d, -100 - d)
   end
-    self.y = love.math.random(-200, getHeightMap() - 200)
+    self.y = love.math.random(-400, getHeightMap() - 400)
   return self
 end
