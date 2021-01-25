@@ -18,14 +18,6 @@ function Shop()
       shop_open = false
     end
 
-    if love.keyboard.isDown('r') then
-      function love.keypressed(key)
-        if key == "r" then
-          monets = monets + 100
-        end
-      end
-    end
-
     if love.keyboard.isDown('1') then
       function love.keyreleased(key)
         if key == "1" and monets >= 200 and health.current < 5 then
