@@ -187,7 +187,6 @@ function startUpdate(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
   moveBullets(dt)
-  show()
 end
 
 function moveZombie(dt, pX, pY)
@@ -212,7 +211,7 @@ function moveBullets(dt)
   if love.keyboard.isDown("space") then
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
-    bullet.initPosition(player.x, player.y)
+    bullet.initPosition()
     table.insert(bullets, bullet)
   end
 

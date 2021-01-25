@@ -8,25 +8,22 @@ function Bullet (_sprite)
   }
 
   -- init position
-  function self.initPosition(pX, pY)
-    self.sprite.x = pX
-    self.sprite.y = pY
+  function self.initPosition()
+    self.sprite.x = player.x
+    self.sprite.y = player.y
 
-    local mX = love.mouse.getX()
-    local mY = love.mouse.getY()
+    local mX = love.mouse.getX() + camera.x
+    local mY = love.mouse.getY() + camera.y
 
-    self.dir = math.atan2(mY - pY, mX - pX)
+    self.dir = math.atan2(mY - player.y, mX - player.x)
 
-    self.x = mX - pX
-    self.y = mY - pY
+    self.x = mX - player.x
+    self.y = mY - player.y
 
   end
 
   -- movement
   function self.move(dt)
-    -- local dx = self.speed * dt * math.cos(self.dir)
-    -- local dy = self.speed * dt * math.sin(self.dir)
-
     local dx = self.speed * dt
     local dy = self.speed * dt
 
@@ -49,17 +46,7 @@ function Bullet (_sprite)
 
     self.sprite.x = self.sprite.x + dx * dirX
     self.sprite.y = self.sprite.y + dy * dirY
-    -- self.sprite.y = self.sprite.y - self.speed * dt
   end
 
   return self
-end
-
-function show()
-  if love.keyboard.isDown('p') then
-    print("----------------------------------")
-    print("px: " .. player.x .. " py: " .. player.y)
-    print("mx: " .. love.mouse.getX() .. " my: " .. love.mouse.getY())
-    print("x:  " .. love.mouse.getX() - player.x .. " y:  " .. love.mouse.getY() - player.y)
-  end
 end
