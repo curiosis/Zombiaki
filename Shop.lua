@@ -26,8 +26,10 @@ function self.keys()
         health.addLife()
         monets = monets - 200
         print(health.current)
-      else
+      elseif key == "1" and health.current >= 3 then
         alert = "You have too much HP"
+      elseif key == "1" and monets < 200 then
+        alert = "Not enough coins"
       end
     end
   end
