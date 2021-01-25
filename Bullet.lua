@@ -82,7 +82,7 @@ function shooting()
     end
   end
   for j, bullet in ipairs(bullets) do
-    if not bullet.isVisible then
+    if not bullet.isVisible or bulletIsOut(bullet) then
       table.remove(bullets, j)
     end
   end
@@ -91,4 +91,12 @@ end
 function isHit(bullet, zombie)
   return math.abs(bullet.x - zombie.x) < 50
   and math.abs(bullet.y - zombie.y) < 50
+end
+
+function bulletIsOut(bullet)
+  local b = bullet.sprite
+  return b.x > getWidthMap() or
+         b.x < 0 or
+         b.y > getHeightMap() or
+         b.y < 0
 end
