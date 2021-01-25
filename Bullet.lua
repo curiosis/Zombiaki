@@ -2,7 +2,8 @@ function Bullet (_sprite)
   local self = {
     sprite = _sprite,
     speed = 500,
-    isVisible = true
+    isVisible = true,
+    shotSound = love.audio.newSource("Audio/Shot.mp3", "static")
   }
 
   -- init position
@@ -45,12 +46,18 @@ function Bullet (_sprite)
     self.sprite.y = self.sprite.y + dy * dirY
   end
 
+  -- sound effects
+  function self.playSoundEffectShot()
+      self.shotSound:setVolume(0.3)
+      self.shotSound:play()
+  end
   return self
 end
 
 function shot(dt)
   local timeOut = (love.timer.getTime() - lastShotTime) * 1000
   if love.mouse.isDown(1) and timeOut >= 500 then
+    Bullet().playSoundEffectShot()
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition()
@@ -68,9 +75,8 @@ function shooting()
     for j = 1, #bullets do
       local bullet = bullets[j]
       if isHit(bullet.sprite, zombie.sprite) then
-        table.remove(zombies, i)
         bullet.isVisible = false
-        monets = monets + 10
+        zombie.getDamage(zombies, i, player.damage)
         break
       end
     end

@@ -1,6 +1,6 @@
 require "TiledMap"
 require "camera"
-require "player"
+require "Player"
 require "Health"
 require "Sprite"
 require "Zombie"

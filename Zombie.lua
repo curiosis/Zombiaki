@@ -1,7 +1,10 @@
 function Zombie(_sprite)
   local self = {
     sprite = _sprite,
-    speed = 100
+    speed = 100,
+    HP = 100,
+    deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
+    hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
 
   -- init position
@@ -34,6 +37,28 @@ function Zombie(_sprite)
   -- init position
   function self.rotate(pX, pY)
     return math.atan2((pY - self.sprite.y), (pX - self.sprite.x))
+  end
+
+  -- get damage
+  function self.getDamage(zombies, i, damage)
+    self.HP = self.HP - damage
+    if(self.HP <= 0) then
+      table.remove(zombies, i)
+      Shop().addMonets()
+      self.playSoundEffectDeath()
+    else
+      self.playSoundEffectHit()
+    end
+  end
+
+  -- sound effects
+  function self.playSoundEffectDeath()
+      self.deathSound:setVolume(0.2)
+      self.deathSound:play()
+  end
+  function self.playSoundEffectHit()
+      self.hitSound:setVolume(0.25)
+      self.hitSound:play()
   end
 
   return self
