@@ -12,6 +12,7 @@ local lastAlertTime = 0
 monets = 0
 alert = ""
 local waveString = "Wave: "
+local killsString = "Kills: "
 
 function love.load()
     menuLoad()
@@ -41,7 +42,8 @@ function love.draw()
     lg.print(monets, 1150, 20)
     lg.print(alert, 10, 500)
     lg.setNewFont(40)
-    lg.print(waveString .. wave.currentWave, 1100, 650)
+    lg.print(waveString .. wave.currentWave, 1000, 650)
+    lg.print(killsString .. kills, 50, 650)
 
     alertResult = (love.timer.getTime() - lastAlertTime) * 1000
     if alertResult >= 2000 then

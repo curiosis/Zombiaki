@@ -29,6 +29,7 @@ bullets = {}
 zombies = {}
 MAX_WAVES = 10
 wave = Wave()
+kills = 0
 lastShotTime = 0
 currentHealth = maxHealth
 health = Health()

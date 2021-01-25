@@ -51,6 +51,7 @@ function Zombie(_sprite, _speed, _HP)
       table.remove(zombies, i)
       Shop().addMonets()
       self.playSoundEffectDeath()
+      kills = kills + 1
     else
       self.playSoundEffectHit()
     end
