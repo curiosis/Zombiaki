@@ -44,7 +44,7 @@ function Zombie(_sprite)
     self.HP = self.HP - damage
     if(self.HP <= 0) then
       table.remove(zombies, i)
-      monets = monets + 10
+      Shop().addMonets()
       self.playSoundEffectDeath()
     else
       self.playSoundEffectHit()
