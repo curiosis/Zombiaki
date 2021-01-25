@@ -9,7 +9,8 @@ player = {
   speed = 300,
   sprite = G.newImage('Sprites/Player.png'),
   x = G.getWidth() / 2,
-  y = G.getHeight() / 2
+  y = G.getHeight() / 2,
+  damage = 80
 }
 
 function player:direction()
@@ -48,4 +49,8 @@ end
 function player:camera()
   if player.x > G.getWidth() / 2 and player.x < 1040 then camera.x = player.x - G.getWidth() / 2 end
   if player.y > G.getHeight() / 2 and player.y < 760 then camera.y = player.y - G.getHeight() / 2 end
+end
+
+function player:addMove()
+  self.speed = self.speed + 10
 end

@@ -1,9 +1,14 @@
 require "Health"
+require "Player"
 
 function Shop()
   local self={
     open_shop = false
   }
+
+function self.addMonets()
+  monets = monets + 10
+end
 
 function self.keys()
   if love.keyboard.isDown('q') then
@@ -25,18 +30,23 @@ function self.keys()
       if key == "1" and monets >= 200 and health.current < 3 then
         health.addLife()
         monets = monets - 200
-        print(health.current)
-      else
+      elseif key == "1" and health.current >= 3 then
         alert = "You have too much HP"
+      elseif key == "1" and monets < 200 then
+        alert = "Not enough coins"
       end
     end
   end
 
   if love.keyboard.isDown('2') then
     function love.keyreleased(key)
-      if key == "2" and monets >= 250 then
-        -- +__ speeda dodac
+      if key == "2" and monets >= 250 and player.speed < 350 then
+        player:addMove()
         monets = monets - 250
+      elseif key == "2" and player.speed == 350 then
+        alert = "Your speed is maximum"
+      elseif key == "2" and monets < 250 then
+        alert = "Not enough coins"
       end
     end
   end
