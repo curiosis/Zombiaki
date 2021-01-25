@@ -9,7 +9,8 @@ player = {
   speed = 300,
   sprite = G.newImage('Sprites/Player.png'),
   x = G.getWidth() / 2,
-  y = G.getHeight() / 2
+  y = G.getHeight() / 2,
+  damage = 100
 }
 
 function player:direction()

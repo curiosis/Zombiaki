@@ -1,7 +1,8 @@
 function Zombie(_sprite)
   local self = {
     sprite = _sprite,
-    speed = 100
+    speed = 100,
+    HP = 100
   }
 
   -- init position
@@ -34,6 +35,13 @@ function Zombie(_sprite)
   -- init position
   function self.rotate(pX, pY)
     return math.atan2((pY - self.sprite.y), (pX - self.sprite.x))
+  end
+
+  function self.getDamage(zombies, i, damage)
+    self.HP = self.HP - damage
+    if(self.HP <= 0) then
+      table.remove(zombies, i)
+    end
   end
 
   return self

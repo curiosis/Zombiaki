@@ -68,8 +68,8 @@ function shooting()
     for j = 1, #bullets do
       local bullet = bullets[j]
       if isHit(bullet.sprite, zombie.sprite) then
-        table.remove(zombies, i)
         bullet.isVisible = false
+        zombie.getDamage(zombies, i, player.damage)
         break
       end
     end
