@@ -7,6 +7,7 @@ require "Zombie"
 require "Injure"
 require "Bullet"
 
+
 -- local player
 local playerX
 local playerY
@@ -26,9 +27,10 @@ local injure
 
 bullets = {}
 zombies = {}
+lastShotTime = 0
 currentHealth = maxHealth
 health = Health()
-BUTTON_HEIGHT = 64
+BUTTON_HEIGHT = 56
 
 _G.about = false
 _G.start = false
@@ -48,11 +50,14 @@ local buttons = {}
 local font = nil
 local mainMenuBackgroundAudio = nil
 local buttonHoverSoundEffect = nil
-
-lastShotTime = 0
+local backgroundMM = nil
+local aboutPanel = nil
 
 function menuLoad()
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
+
+  backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
+  aboutPanel = G.newImage('Sprites/AboutPanel.png')
 
   mainMenuBackgroundAudio = love.audio.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
   buttonHoverSoundEffect = love.audio.newSource("Audio/buttonHover.mp3", "static")
@@ -73,7 +78,11 @@ function menuLoad()
   table.insert(buttons, newButton(
     "About",
     function()
-      about = true
+      if about then
+        about = false
+      else
+        about = true
+      end
     end))
 
   table.insert(buttons, newButton(
@@ -91,8 +100,10 @@ end
 
 function menuDraw()
 
+  G.draw(backgroundMM,0,0)
+
   local ww = love.graphics.getWidth()
-  local wh = love.graphics.getHeight() + 150
+  local wh = love.graphics.getHeight() + 300
 
   local button_width = ww * (1/3)
 
@@ -103,10 +114,10 @@ function menuDraw()
   for i, button in ipairs(buttons) do
     button.last = button.now
 
-    local bx = (ww * 0.5) - (button_width * 0.5)
-    local by = (wh * 0.5) - (total_height * 0.5) + cursor_y
+    local bx = (ww * 0.7) - (button_width * 0.5)
+    local by = (wh * 0.45) - (total_height * 0.5) + cursor_y
 
-    local color = {0.4, 0.4, 0.4, 1.0}
+    local color = {0.1, 0.1, 0.1, 1.0}
 
     local mouseXPos, mouseYPos = love.mouse.getPosition()
 
@@ -116,7 +127,8 @@ function menuDraw()
                   mouseYPos < by + BUTTON_HEIGHT
 
     if hover then
-      color = {0.8, 0.8, 0.9, 1.0}
+      color = {75/255, 60/255, 60/255, 1.0}
+      bx = bx - 60
     end
 
     button.now = love.mouse.isDown(1)
@@ -134,12 +146,21 @@ function menuDraw()
     local textW = font:getWidth(button.text)
     local textH = font:getHeight(button.text)
 
-    love.graphics.print(
-      button.text,
-      font,
-      (ww * 0.5) - textW * 0.5,
-      by + textH * 0.5
-    )
+    if hover then
+      love.graphics.print(
+        button.text,
+        font,
+        (ww * 0.7) - textW * 0.5 - 60,
+        by + textH * 0.5
+      )
+    else
+      love.graphics.print(
+        button.text,
+        font,
+        (ww * 0.7) - textW * 0.5,
+        by + textH * 0.5
+      )
+    end
 
     cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
 
@@ -147,17 +168,21 @@ function menuDraw()
   love.graphics.setColor(1, 1, 1, 1)
 end
 
+function aboutDraw()
+  G.draw(aboutPanel, 50, 100)
+end
+
 function startLoad()
+  print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
-  list = {{-200, 0}, {-500, 0}, {-100, 100}, {-100, 300}, {-100, 500}, {2000, 150}, {1600, 400}, {1800, 800}, {1700, 300}, {1800, 400}}
+  bulletImg = G.newImage('Sprites/Bullet.jpg')
+  list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
   for i = 1, 10 do
       local zombieSprite = Sprite(zombieImg)
       local zombie = Zombie(zombieSprite)
       zombie.initPosition(list[i][1], list[i][2])
       table.insert(zombies, zombie)
   end
-
-  bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
 function startDraw()
@@ -179,7 +204,7 @@ function startDraw()
   end
 
   drawFog()
-  health.drawHearts()
+
   camera:unset()
 end
 
