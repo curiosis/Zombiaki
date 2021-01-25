@@ -69,33 +69,33 @@ function menuLoad()
   mainMenuBackgroundAudio:play()
 
   table.insert(buttons, newButton(
-    "Start Game",
-    function()
-      _G.map = loadMap("Map/map")
-      start = true
-    end))
+  "Start Game",
+  function()
+    _G.map = loadMap("Map/map")
+    start = true
+  end))
 
   table.insert(buttons, newButton(
-    "About",
-    function()
-      if about then
-        about = false
-      else
-        about = true
-      end
-    end))
+  "About",
+  function()
+    if about then
+      about = false
+    else
+      about = true
+    end
+  end))
 
   table.insert(buttons, newButton(
-    "Credits",
-    function()
-      print("Credits page")
-    end))
+  "Credits",
+  function()
+    print("Credits page")
+  end))
 
   table.insert(buttons, newButton(
-    "Quit",
-    function()
-      love.event.quit(0)
-    end))
+  "Quit",
+  function()
+    love.event.quit(0)
+  end))
 end
 
 function menuDraw()
@@ -122,9 +122,9 @@ function menuDraw()
     local mouseXPos, mouseYPos = love.mouse.getPosition()
 
     local hover = mouseXPos > bx and
-                  mouseXPos < bx + button_width and
-                  mouseYPos > by and
-                  mouseYPos < by + BUTTON_HEIGHT
+    mouseXPos < bx + button_width and
+    mouseYPos > by and
+    mouseYPos < by + BUTTON_HEIGHT
 
     if hover then
       color = {75/255, 60/255, 60/255, 1.0}
@@ -148,24 +148,24 @@ function menuDraw()
 
     if hover then
       love.graphics.print(
-        button.text,
-        font,
-        (ww * 0.7) - textW * 0.5 - 60,
-        by + textH * 0.5
-      )
-    else
-      love.graphics.print(
-        button.text,
-        font,
-        (ww * 0.7) - textW * 0.5,
-        by + textH * 0.5
-      )
-    end
+      button.text,
+      font,
+      (ww * 0.7) - textW * 0.5 - 60,
+      by + textH * 0.5
+    )
+  else
+    love.graphics.print(
+    button.text,
+    font,
+    (ww * 0.7) - textW * 0.5,
+    by + textH * 0.5
+  )
+end
 
-    cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
+cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
 
-  end
-  love.graphics.setColor(1, 1, 1, 1)
+end
+love.graphics.setColor(1, 1, 1, 1)
 end
 
 function aboutDraw()
@@ -178,10 +178,10 @@ function startLoad()
   bulletImg = G.newImage('Sprites/Bullet.jpg')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
   for i = 1, 10 do
-      local zombieSprite = Sprite(zombieImg)
-      local zombie = Zombie(zombieSprite)
-      zombie.initPosition(list[i][1], list[i][2])
-      table.insert(zombies, zombie)
+    local zombieSprite = Sprite(zombieImg)
+    local zombie = Zombie(zombieSprite)
+    zombie.initPosition(list[i][1], list[i][2])
+    table.insert(zombies, zombie)
   end
 end
 
@@ -194,8 +194,8 @@ function startDraw()
     local zombie = zombies[i].sprite
     local rotate = zombies[i].rotate(player.x, player.y)
     G.draw(
-      zombie.image, zombie.x, zombie.y, rotate, 1, 1,
-      zombie.width / 2, zombie.height / 2)
+    zombie.image, zombie.x, zombie.y, rotate, 1, 1,
+    zombie.width / 2, zombie.height / 2)
   end
 
   for i = 1, #bullets do
@@ -208,6 +208,9 @@ function startDraw()
   camera:unset()
 end
 
+function gameOverDraw()
+
+end
 function startUpdate(dt)
   player:update(dt)
   moveZombie(dt, player.x, player.y)

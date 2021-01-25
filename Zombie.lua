@@ -30,8 +30,8 @@ function Zombie(_sprite)
       newY = self.sprite.y - (self.speed * dt)
     end
 
-      self.sprite.x = newX
-      self.sprite.y = newY
+    self.sprite.x = newX
+    self.sprite.y = newY
   end
 
   -- init position
@@ -53,12 +53,12 @@ function Zombie(_sprite)
 
   -- sound effects
   function self.playSoundEffectDeath()
-      self.deathSound:setVolume(0.2)
-      self.deathSound:play()
+    self.deathSound:setVolume(0.2)
+    self.deathSound:play()
   end
   function self.playSoundEffectHit()
-      self.hitSound:setVolume(0.25)
-      self.hitSound:play()
+    self.hitSound:setVolume(0.25)
+    self.hitSound:play()
   end
 
   return self

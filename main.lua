@@ -13,8 +13,8 @@ monets = 0
 alert = ""
 
 function love.load()
-    menuLoad()
-    startLoad()
+  menuLoad()
+  startLoad()
 
   shop = lg.newImage('Sprites/shop.png')
   shop2 = lg.newImage('Sprites/shop2.png')
