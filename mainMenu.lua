@@ -187,7 +187,7 @@ function startDraw()
 
   for i = 1, #zombies do
     local zombie = zombies[i].sprite
-    local rotate = zombies[i].rotate(player.x, player.y)
+    local rotate = zombies[i].rotate()
     G.draw(
       zombie.image, zombie.x, zombie.y, rotate, 1, 1,
       zombie.width / 2, zombie.height / 2)
@@ -205,7 +205,7 @@ end
 
 function startUpdate(dt)
   player:update(dt)
-  moveZombie(dt, player.x, player.y)
+  moveZombie(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
   shot(dt)

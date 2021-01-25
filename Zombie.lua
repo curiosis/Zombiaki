@@ -14,17 +14,17 @@ function Zombie(_sprite, _speed, _HP)
   end
 
   -- movement
-  function self.move(dt, pX, pY, zombies)
+  function self.move(dt, zombies)
     local newX = 0
     local newY = 0
     -- horizontal movement
-    if self.sprite.x <= pX then
+    if self.sprite.x <= player.x then
       newX = self.sprite.x + (self.speed * dt)
     else
       newX = self.sprite.x - (self.speed * dt)
     end
     -- vertical movement
-    if self.sprite.y <= pY then
+    if self.sprite.y <= player.y then
       newY = self.sprite.y + (self.speed * dt)
     else
       newY = self.sprite.y - (self.speed * dt)
@@ -35,8 +35,8 @@ function Zombie(_sprite, _speed, _HP)
   end
 
   -- init position
-  function self.rotate(pX, pY)
-    return math.atan2((pY - self.sprite.y), (pX - self.sprite.x))
+  function self.rotate()
+    return math.atan2((player.y - self.sprite.y), (player.x - self.sprite.x))
   end
 
   -- get damage
@@ -64,11 +64,11 @@ function Zombie(_sprite, _speed, _HP)
   return self
 end
 
-function moveZombie(dt, pX, pY)
+function moveZombie(dt)
   for i = 1, #zombies do
     local zombie = zombies[i]
     local t = copyTable(zombies, i)
-    zombie.move(dt, pX, pY, t)
+    zombie.move(dt, t)
   end
 end
 
