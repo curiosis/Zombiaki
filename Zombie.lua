@@ -12,7 +12,7 @@ function Zombie(_sprite)
 
   -- movement
   function self.move(dt, pX, pY, zombies)
-    local nexX = 0
+    local newX = 0
     local newY = 0
     -- horizontal movement
     if self.sprite.x <= pX then
@@ -37,4 +37,22 @@ function Zombie(_sprite)
   end
 
   return self
+end
+
+function moveZombie(dt, pX, pY)
+  for i = 1, #zombies do
+    local zombie = zombies[i]
+    local t = copyTable(zombies, i)
+    zombie.move(dt, pX, pY, t)
+  end
+end
+
+function copyTable(old, n)
+  local t = {}
+  for i = 1, #old do
+    if i ~= n then
+      table.insert(t, old[i])
+    end
+  end
+  return t
 end
