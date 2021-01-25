@@ -1,8 +1,9 @@
-function Zombie(_sprite, _speed, _HP)
+function Zombie(_sprite, _speed, _HP, _money)
   local self = {
     sprite = _sprite,
     speed = _speed,
     HP = _HP,
+    money = _money,
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
@@ -49,7 +50,7 @@ function Zombie(_sprite, _speed, _HP)
     self.HP = self.HP - damage
     if(self.HP <= 0) then
       table.remove(zombies, i)
-      Shop().addMonets()
+      Shop().addMonets(self.money)
       self.playSoundEffectDeath()
       kills = kills + 1
     else
@@ -89,10 +90,10 @@ function copyTable(old, n)
 end
 
 -- spawn zombies
-function spawnZombies(count, image, speed, HP, distance)
+function spawnZombies(count, image, speed, HP, distance, money)
   for i = 1, count do
       local zombieSprite = Sprite(image)
-      local zombie = Zombie(zombieSprite, speed, HP)
+      local zombie = Zombie(zombieSprite, speed, HP, money)
       local position = randomPosition(distance)
       zombie.initPosition(position.x, position.y)
       table.insert(zombies, zombie)

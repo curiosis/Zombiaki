@@ -15,23 +15,26 @@ function Wave()
   function self.newWave()
     -- count, img, speed, HP, distance
 
+-- DEFAULT
     -- spawn default zombies
     local zombieCount = self.currentWave + 3
-    spawnZombies(zombieCount, defaultZombieImg, 100, 100, 100)
+    spawnZombies(zombieCount, defaultZombieImg, 100, 100, 100, 10)
 
     -- spawn default zombies but farther
-    spawnZombies(zombieCount - 2, defaultZombieImg, 100, 100, 1000)
+    spawnZombies(zombieCount - 2, defaultZombieImg, 100, 100, 1000, 10)
 
     -- spawn default zombies buuuut farther
     if self.currentWave >= 5 then
-      spawnZombies(zombieCount + 2, defaultZombieImg, 100, 100, 3000) 
+      spawnZombies(zombieCount + 2, defaultZombieImg, 100, 100, 3000, 10)
     end
 
+-- STRONGER
     -- spawn stronger zombies
-    spawnZombies(zombieCount - 6, defaultZombieImg, 80, 200, 100)
+    spawnZombies(zombieCount - 6, defaultZombieImg, 80, 200, 100, 10)
 
-    -- spawn stronger zombies
-    spawnZombies(zombieCount - 8, defaultZombieImg, 150, 100, 1000)
+-- FASTER
+    -- spawn faster zombies
+    spawnZombies(zombieCount - 8, defaultZombieImg, 150, 100, 1000, 10)
   end
 
   return self
