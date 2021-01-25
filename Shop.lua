@@ -30,6 +30,7 @@ function self.keys()
       if key == "1" and monets >= 200 and health.current < 3 then
         health.addLife()
         monets = monets - 200
+        alert = "+1 heart"
       elseif key == "1" and health.current >= 3 then
         alert = "You have too much HP"
       elseif key == "1" and monets < 200 then
@@ -43,6 +44,7 @@ function self.keys()
       if key == "2" and monets >= 250 and player.speed < 350 then
         player:addMove()
         monets = monets - 250
+        alert = "+10 speed"
       elseif key == "2" and player.speed == 350 then
         alert = "Your speed is maximum"
       elseif key == "2" and monets < 250 then
