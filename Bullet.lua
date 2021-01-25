@@ -96,15 +96,17 @@ function shooting()
   end
 end
 
-function isHit(bullet, sprite)
-  return math.abs(bullet.x - sprite.x) < 50
-  and math.abs(bullet.y - sprite.y) < 50
+function isHit(bullet, sprite, isZombieShoot)
+  local hitbox = 8
+  if not isZombieShoot then hitbox = 10 end
+  return math.abs(bullet.x - sprite.x) < 5 * hitbox
+  and math.abs(bullet.y - sprite.y) < 5 * hitbox
 end
 
 function bulletIsOut(bullet)
   local b = bullet.sprite
   return b.x > getWidthMap() or
-         b.x < 0 or
-         b.y > getHeightMap() or
-         b.y < 0
+  b.x < 0 or
+  b.y > getHeightMap() or
+  b.y < 0
 end

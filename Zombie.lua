@@ -144,7 +144,7 @@ function zombieShooting()
     if zombie.canShooting then
       for j = 1, #zombie.bullets do
         local bullet = zombie.bullets[j]
-        if isHit(bullet.sprite, player) then
+        if isHit(bullet.sprite, player, true) then
           bullet.isVisible = false
           print("player get shot")
           break
