@@ -5,6 +5,7 @@ require "Health"
 require "Sprite"
 require "Zombie"
 require "Injure"
+require "Bullet"
 
 
 -- local player
@@ -24,7 +25,9 @@ local screenResH = 720
 local playerRot
 local injure
 
+bullets = {}
 zombies = {}
+lastShotTime = 0
 currentHealth = maxHealth
 health = Health()
 BUTTON_HEIGHT = 56
@@ -172,6 +175,7 @@ end
 function startLoad()
   print("start")
   zombieImg = G.newImage('Sprites/Zombie.png')
+  bulletImg = G.newImage('Sprites/Bullet.jpg')
   list = {{50, 50}, {1000, 50}, {10, 400}, {1000, 800}, {100, 50}, {1000, 250}, {600, 400}, {800, 800}, {700, 400}, {800, 400}}
   for i = 1, 10 do
       local zombieSprite = Sprite(zombieImg)
@@ -194,6 +198,11 @@ function startDraw()
       zombie.width / 2, zombie.height / 2)
   end
 
+  for i = 1, #bullets do
+    local bullet = bullets[i]
+    G.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
+  end
+
   drawFog()
 
   camera:unset()
@@ -204,22 +213,6 @@ function startUpdate(dt)
   moveZombie(dt, player.x, player.y)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
-end
-
-function moveZombie(dt, pX, pY)
-  for i = 1, #zombies do
-    local zombie = zombies[i]
-    local t = copyTable(zombies, i)
-    zombie.move(dt, pX, pY, t)
-  end
-end
-
-function copyTable(old, n)
-  local t = {}
-  for i = 1, #old do
-    if i ~= n then
-      table.insert(t, old[i])
-    end
-  end
-  return t
+  shot(dt)
+  shooting()
 end
