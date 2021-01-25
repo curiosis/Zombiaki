@@ -13,7 +13,7 @@ function Wave()
   end
 
   function self.newWave()
-    -- count, img, speed, HP, distance
+    -- count, img, speed, HP, distance, money
 
 -- DEFAULT
     -- spawn default zombies
@@ -34,7 +34,7 @@ function Wave()
 
 -- FASTER
     -- spawn faster zombies
-    spawnZombies(zombieCount - 8, defaultZombieImg, 150, 100, 1000, 10)
+    spawnZombies(zombieCount - 8, defaultZombieImg, 180, 100, 1000, 10)
   end
 
   return self
