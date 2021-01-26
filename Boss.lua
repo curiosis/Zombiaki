@@ -1,5 +1,5 @@
 bosses = {}
-BOSS_HP = 20000
+BOSS_HP = 1
 
 function Boss(_sprite, _speed, _HP, _money)
   local self = {
