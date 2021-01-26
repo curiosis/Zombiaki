@@ -1,4 +1,5 @@
 speedBullet = 500
+currentTimeOut = 500
 
 function Bullet (_sprite)
   local self = {
@@ -65,7 +66,7 @@ end
 
 function shot(dt)
   local timeOut = (love.timer.getTime() - lastShotTime) * 1000
-  if love.mouse.isDown(1) and timeOut >= 500 then
+  if love.mouse.isDown(1) and timeOut >= currentTimeOut then
     Bullet().playSoundEffectShot()
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
@@ -114,4 +115,5 @@ end
 
 function addSpeedBullet()
   speedBullet = speedBullet + 25
+  currentTimeOut = currentTimeOut - 50
 end

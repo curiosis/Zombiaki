@@ -131,7 +131,7 @@ end
 -- zombie shoots
 function zombieShot(dt, zombie)
   local timeOut = (love.timer.getTime() - zombie.lastShotTime) * 1000
-  if timeOut >= 1000 then
+  if timeOut >= 1500 then
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition(zombie.sprite, true)

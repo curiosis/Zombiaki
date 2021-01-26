@@ -69,5 +69,5 @@ function player:addMove()
 end
 
 function player:addDamage()
-  self.damage = self.damage + 10
+  self.damage = self.damage + 20
 end

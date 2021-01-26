@@ -26,11 +26,9 @@ local injure
 
 bullets = {}
 zombies = {}
-MAX_WAVES = 10
-wave = Wave()
 kills = 0
 lastShotTime = 0
-maxHealth = 10
+maxHealth = 5
 currentHealth = maxHealth
 health = Health()
 BUTTON_HEIGHT = 56

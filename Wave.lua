@@ -1,3 +1,6 @@
+MAX_WAVES = 20
+wave = Wave()
+
 function Wave()
   local self = {
     currentWave = 0
@@ -23,7 +26,7 @@ function Wave()
       calcSpeed(100, w, 50),  -- speed
       calcHP(100, w),         -- HP
       100,                    -- distance
-      10)                     -- money
+      4 + w)                  -- money
 
     -- spawn default zombies but farther
     spawnZombies(
@@ -31,18 +34,18 @@ function Wave()
       defaultZombieImg,
       calcSpeed(100, w, 20),
       calcHP(100, w),
-      calcDist(2000, w),
-      10)
+      calcDist(3000, w),
+      4 + w)
 
     -- spawn default zombies buuuut farther
     if self.currentWave >= 5 then
       spawnZombies(
-      w + 5,
+      w,
       defaultZombieImg,
       calcSpeed(100, w, 100),
       calcHP(100, w),
-      calcDist(4000, w),
-      10)
+      calcDist(5000, w),
+      4 + w)
     end
 
     -- STRONGER
@@ -53,7 +56,7 @@ function Wave()
       80,
       calcHP(200, w),
       200,
-      10)
+      4 + w)
 
     -- STRONGER
     -- spawn stronger zombies but farther
@@ -63,8 +66,8 @@ function Wave()
       defaultZombieImg,
       80,
       calcHP(200, w),
-      calcDist(1000, w),
-      10)
+      calcDist(2000, w),
+      9 + w)
     end
 
     -- FASTER
@@ -75,16 +78,16 @@ function Wave()
       calcSpeed(180, w, 50),
       100,
       calcDist(1200, w),
-      10)
+      9 + w)
 
     -- SHOOTING
     spawnZombies(
-      math.ceil(w / 2),
+      math.floor(x)(w / 2),
       defaultZombieImg,
       calcSpeed(60, w, 50),
       200,
       calcDist(300, w),
-      20,
+      19 + w,
       true)
   end
   return self

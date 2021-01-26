@@ -2,9 +2,8 @@ require "Health"
 require "Player"
 
 function Shop()
-  local self={
+  local self = {
     open_shop = false,
-    speedBullet = 0
   }
 
   function self.addMonets(money)
@@ -21,10 +20,10 @@ function Shop()
 
     if love.keyboard.isDown('1') then
       function love.keyreleased(key)
-        if key == "1" and monets >= 200 and health.current < 5 then
+        if key == "1" and monets >= 200 and health.current < maxHealth then
           health.addLife()
           monets = monets - 200
-        elseif key == "1" and health.current >= 5 then
+        elseif key == "1" and health.current >= maxHealth then
           alert = "You have too much HP"
         elseif key == "1" and monets < 200 then
           alert = "Not enough coins"
@@ -48,11 +47,11 @@ function Shop()
 
     if love.keyboard.isDown('3') then
       function love.keyreleased(key)
-        if key == "3" and monets >= 300 and player.damage < 150 then
+        if key == "3" and monets >= 300 and player.damage < 200 then
           player:addDamage()
           monets = monets - 300
           alert = "+10 damage"
-        elseif key == "3" and player.damage == 150 then
+        elseif key == "3" and player.damage == 200 then
           alert = "Your damage is maximum"
         elseif key == "3" and monets < 300 then
           alert = "Not enough coins"
