@@ -1,3 +1,5 @@
+local T = love.timer
+
 function Injure(_player, _playerX, _playerY)
   local self = {
     player = _player,
@@ -21,11 +23,11 @@ function Injure(_player, _playerX, _playerY)
       for j = 1, #bosses do
         local boss = bosses[j]
         if boss.isClose() then
-          local timeOut = (love.timer.getTime() - boss.lastHitTime) * 1000
+          local timeOut = (T.getTime() - boss.lastHitTime) * 1000
           if timeOut >= 500 then
             currentHealth = health.loseLife(1)
             boss.shotCounter = 5
-            boss.lastHitTime = love.timer.getTime()
+            boss.lastHitTime = T.getTime()
           end
           break
         end
