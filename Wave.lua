@@ -1,4 +1,4 @@
-MAX_WAVES = 3
+MAX_WAVES = 16
 wasBossSpawn = false
 
 function Wave()
@@ -160,6 +160,6 @@ function calcHP(hp, w)
 end
 
 function changeMap(waveNumber)
-  if waveNumber == 2 then map = loadMap("Map/map2") m1 = false m2 = true end
-  if waveNumber == 3 then map = loadMap("Map/map3") m2 = false m3 = true end
+  if waveNumber == 6 then map = loadMap("Map/map2") m1 = false m2 = true end
+  if waveNumber == 11 then map = loadMap("Map/map3") m2 = false m3 = true end
 end
