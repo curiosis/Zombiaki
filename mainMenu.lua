@@ -224,8 +224,8 @@ function startDraw()
     local boss = bosses[i].sprite
     local rotate = bosses[i].rotate()
     G.draw(boss.image, boss.x, boss.y, rotate, 1, 1,
-    boss.width / 2, boss.height / 2
-  )
+    boss.width / 2, boss.height / 2)
+    bosses[i].displayHP()
   end
 
   drawFog()

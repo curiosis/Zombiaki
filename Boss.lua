@@ -1,4 +1,5 @@
 bosses = {}
+BOSS_HP = 20000
 
 function Boss(_sprite, _speed, _HP, _money)
   local self = {
@@ -8,6 +9,8 @@ function Boss(_sprite, _speed, _HP, _money)
     money = _money,
     lastHitTime = 0,
     shotCounter = 0,
+    hpSprite = love.graphics.newImage('Sprites/HP.png'),
+    hpBorder = love.graphics.newImage('Sprites/HP_border.png'),
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
@@ -91,13 +94,30 @@ function Boss(_sprite, _speed, _HP, _money)
     end
   end
 
+  function self.displayHP()
+    r = BOSS_HP / camera.resW
+    local hp = self.HP / r
+    for i = 1, hp + 4 do
+      local x = (i - 1) + camera.x
+      local y = 6 + camera.y
+      love.graphics.draw(self.hpBorder, x, y)
+    end
+    for i = 1, hp do
+      local x = 2 + (i - 1) + camera.x
+      local y = 8 + camera.y
+      love.graphics.draw(self.hpSprite, x, y)
+    end
+    love.graphics.setNewFont(40)
+    love.graphics.print("BOSS", camera.x + camera.resW / 2 - 50, camera.y + 50)
+  end
+
   -- sound effects
   function self.playSoundEffectDeath()
     self.deathSound:setVolume(0.2)
     self.deathSound:play()
   end
   function self.playSoundEffectHit()
-    self.hitSound:setVolume(0.25)
+    self.hitSound:setVolume(0.35)
     self.hitSound:play()
   end
 
