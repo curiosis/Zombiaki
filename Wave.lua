@@ -1,5 +1,4 @@
 MAX_WAVES = 20
-wave = Wave()
 
 function Wave()
   local self = {
@@ -82,7 +81,7 @@ function Wave()
 
     -- SHOOTING
     spawnZombies(
-      math.floor(x)(w / 2),
+      math.floor(w / 2),
       defaultZombieImg,
       calcSpeed(60, w, 50),
       200,

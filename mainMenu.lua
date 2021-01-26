@@ -26,6 +26,7 @@ local injure
 
 bullets = {}
 zombies = {}
+wave = Wave()
 kills = 0
 lastShotTime = 0
 maxHealth = 5
