@@ -39,6 +39,11 @@ _G.about = false
 _G.start = false
 _G.arena = false
 
+_G.m1 = false
+_G.m2 = false
+_G.m3 = false
+_G.mA = false
+
 local
 function newButton(text, fn)
   return{
@@ -75,17 +80,17 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Story Mode",
   function()
-    _G.map = loadMap("Map/map1")
-    m1 = true
+    _G.map = loadMap("Map/map2")
+    m2 = true
     start = true
   end))
 
   table.insert(buttons, newButton(
   "Endless mode",
   function()
+    mA = true
     _G.map = loadMap("Map/mapArena")
-    m2 = true
-    print("Arena")
+    arena = true
   end))
 
   table.insert(buttons, newButton(
