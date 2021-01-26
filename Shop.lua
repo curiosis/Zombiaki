@@ -8,12 +8,17 @@ function Shop()
     speedSoundEffect = love.audio.newSource("Audio/SpeedPotion.mp3", "static"),
     strengthSoundEffect = love.audio.newSource("Audio/StrengthPotion.mp3", "static"),
     sniperSoundEffect = love.audio.newSource("Audio/SniperPotion.mp3", "static"),
+    noCoinsSoundEffect = love.audio.newSource("Audio/NoCoins.mp3", "static"),
   }
 
   function self.addMonets(money)
     monets = monets + money
   end
 
+  function self.notEnoughCoins()
+    alert = "Not enough coins"
+    self.noCoinsSoundEffect:play()
+  end
 
   function self.keys()
     if love.keyboard.isDown('q') then
@@ -32,7 +37,7 @@ function Shop()
         elseif key == "1" and health.current >= maxHealth then
           alert = "You have too much HP"
         elseif key == "1" and monets < 250 then
-          alert = "Not enough coins"
+          self.notEnoughCoins()
         end
       end
     end
@@ -47,7 +52,7 @@ function Shop()
         elseif key == "2" and player.speed == 350 then
           alert = "Your speed is maximum"
         elseif key == "2" and monets < 250 then
-          alert = "Not enough coins"
+          self.notEnoughCoins()
         end
       end
     end
@@ -62,7 +67,7 @@ function Shop()
         elseif key == "3" and player.damage == 200 then
           alert = "Your damage is maximum"
         elseif key == "3" and monets < 300 then
-          alert = "Not enough coins"
+          self.notEnoughCoins()
         end
       end
     end
@@ -77,7 +82,7 @@ function Shop()
         elseif key == "4" and speedBullet == 600 then
           alert = "Your speed bullet is maximum"
         elseif key == "4" and monets < 300 then
-          alert = "Not enough coins"
+          self.notEnoughCoins()
         end
       end
     end
