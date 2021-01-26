@@ -23,6 +23,7 @@ function Shop()
         if key == "1" and monets >= 250 and health.current < maxHealth then
           health.addLife()
           monets = monets - 250
+          alert = "+1 health"
         elseif key == "1" and health.current >= maxHealth then
           alert = "You have too much HP"
         elseif key == "1" and monets < 250 then
@@ -50,7 +51,7 @@ function Shop()
         if key == "3" and monets >= 300 and player.damage < 200 then
           player:addDamage()
           monets = monets - 300
-          alert = "+10 damage"
+          alert = "+20 damage"
         elseif key == "3" and player.damage == 200 then
           alert = "Your damage is maximum"
         elseif key == "3" and monets < 300 then
