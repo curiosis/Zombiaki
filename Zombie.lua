@@ -39,7 +39,8 @@ function Zombie(_sprite, _speed, _HP, _money, _canShooting)
       newY = self.sprite.y
     end
 
-    if math.abs(self.sprite.x - player.x) < 500  and math.abs(self.sprite.y - player.y) then
+    -- zombie can shooting only if they are near the player
+    if math.abs(self.sprite.x - player.x) < 500  and math.abs(self.sprite.y - player.y) < 500 then
       if self.canShooting then
         zombieShot(dt, zombie)
         zombieShooting()
@@ -127,7 +128,7 @@ function randomPosition(d)
   return self
 end
 
--- zombie shot
+-- zombie shoots
 function zombieShot(dt, zombie)
   local timeOut = (love.timer.getTime() - zombie.lastShotTime) * 1000
   if timeOut >= 1000 then
