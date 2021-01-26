@@ -20,12 +20,12 @@ function Shop()
 
     if love.keyboard.isDown('1') then
       function love.keyreleased(key)
-        if key == "1" and monets >= 200 and health.current < maxHealth then
+        if key == "1" and monets >= 250 and health.current < maxHealth then
           health.addLife()
-          monets = monets - 200
+          monets = monets - 250
         elseif key == "1" and health.current >= maxHealth then
           alert = "You have too much HP"
-        elseif key == "1" and monets < 200 then
+        elseif key == "1" and monets < 250 then
           alert = "Not enough coins"
         end
       end
@@ -61,13 +61,13 @@ function Shop()
 
     if love.keyboard.isDown('4') then
       function love.keyreleased(key)
-        if key == "4" and monets >= 250 and speedBullet < 600 then
+        if key == "4" and monets >= 300 and speedBullet < 600 then
           addSpeedBullet()
-          monets = monets - 250
+          monets = monets - 300
           alert = "+25 speed bullet"
         elseif key == "4" and speedBullet == 600 then
           alert = "Your speed bullet is maximum"
-        elseif key == "4" and monets < 250 then
+        elseif key == "4" and monets < 300 then
           alert = "Not enough coins"
         end
       end
