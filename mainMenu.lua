@@ -189,7 +189,6 @@ function aboutDraw()
 end
 
 function startLoad()
-  print("start")
   defaultZombieImg = G.newImage('Sprites/Zombie1.png')
   fastZombieImg = G.newImage('Sprites/Zombie3.png')
   strongZombieImg = G.newImage('Sprites/Zombie2.png')
