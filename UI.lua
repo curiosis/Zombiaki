@@ -18,8 +18,10 @@ local zombiesString = "Zombies: "
 local shop
 local shop2
 local coin
+local dark
 
 function UIDraw()
+  G.draw(dark,0,0)
   health.drawHearts()
   G.draw(shop2, 320, 550)
   G.draw(coin, 1210, 12)
@@ -58,5 +60,6 @@ function UILoad()
   shop = G.newImage('Sprites/shop.png')
   shop2 = G.newImage('Sprites/shop2.png')
   coin = G.newImage('Sprites/coin.png')
+  dark = G.newImage('Map/Darker.png')
   G.setNewFont(28)
 end

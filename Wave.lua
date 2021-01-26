@@ -1,4 +1,4 @@
-MAX_WAVES = 16
+MAX_WAVES = 15
 wasBossSpawn = false
 
 function Wave()
