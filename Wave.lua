@@ -14,30 +14,94 @@ function Wave()
 
   function self.newWave()
     -- count, img, speed, HP, distance, money
-
--- DEFAULT
+    local w = self.currentWave
+    -- DEFAULT
     -- spawn default zombies
---     local zombieCount = self.currentWave + 3
---     spawnZombies(zombieCount, defaultZombieImg, 100, 100, 100, 10)
---
---     -- spawn default zombies but farther
---     spawnZombies(zombieCount - 2, defaultZombieImg, 100, 100, 1000, 10)
---
---     -- spawn default zombies buuuut farther
---     if self.currentWave >= 5 then
---       spawnZombies(zombieCount + 2, defaultZombieImg, 100, 100, 3000, 10)
---     end
---
--- -- STRONGER
---     -- spawn stronger zombies
---     spawnZombies(zombieCount - 6, defaultZombieImg, 80, 200, 100, 10)
---
--- -- FASTER
---     -- spawn faster zombies
---     spawnZombies(zombieCount - 8, defaultZombieImg, 180, 100, 1000, 10)
+    spawnZombies(
+      w + 3,                  -- count
+      defaultZombieImg,       -- img
+      calcSpeed(100, w, 20),  -- speed
+      calcHP(100, w),         -- HP
+      100,                    -- distance
+      10)                     -- money
 
--- SHOOTING
-    spawnZombies(5, defaultZombieImg, 60, 200, 100, 10, true)
+    -- spawn default zombies but farther
+    spawnZombies(
+      w + 1,
+      defaultZombieImg,
+      calcSpeed(100, w, 20),
+      calcHP(100, w),
+      calcDist(2000, w),
+      10)
+
+    -- spawn default zombies buuuut farther
+    if self.currentWave >= 5 then
+      spawnZombies(
+      w + 5,
+      defaultZombieImg,
+      calcSpeed(100, w, 20),
+      calcHP(100, w),
+      calcDist(4000, w),
+      10)
+    end
+
+    -- STRONGER
+    -- spawn stronger zombies
+    spawnZombies(
+      w - 3,
+      defaultZombieImg,
+      80,
+      calcHP(200, w),
+      200,
+      10)
+
+    -- STRONGER
+    -- spawn stronger zombies but farther
+    if self.currentWave >= 5 then
+      spawnZombies(
+      w,
+      defaultZombieImg,
+      80,
+      calcHP(200, w),
+      calcDist(1000, w),
+      10)
+    end
+
+    -- FASTER
+    -- spawn faster zombies
+    spawnZombies(
+      w - 5,
+      defaultZombieImg,
+      calcSpeed(180, w, 50),
+      100,
+      calcDist(1200, w),
+      10)
+
+    -- SHOOTING
+    spawnZombies(
+      math.ceil(w / 2),
+      defaultZombieImg,
+      calcSpeed(60, w, 50),
+      200,
+      calcDist(300, w),
+      20,
+      true)
   end
   return self
+end
+
+function calcSpeed(n, w, m)
+  return n * (1 + (w - 1) / m)
+end
+
+function calcDist(d, w)
+  return d + w * 50
+end
+
+function calcHP(hp, w)
+  if w > 5 then
+    return hp * (1 + w / 10)
+  else
+    return hp
+  end
 end
