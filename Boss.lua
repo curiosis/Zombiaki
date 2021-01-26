@@ -83,10 +83,8 @@ end
 
 -- spawn boss
 function spawnBoss(image, speed, HP, money, x, y)
-  for i = 1, count do
-    local bossSprite = Sprite(image)
-    local boss = Boss(bossSprite, speed, HP, money)
-    boss.initPosition(x, y)
-    table.insert(bosses, boss)
-  end
+  local bossSprite = Sprite(image)
+  local boss = Boss(bossSprite, speed, HP, money)
+  boss.initPosition(x, y)
+  table.insert(bosses, boss)
 end

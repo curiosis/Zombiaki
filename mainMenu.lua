@@ -191,6 +191,7 @@ end
 function startLoad()
   print("start")
   defaultZombieImg = G.newImage('Sprites/Zombie.png')
+  bossImage = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
@@ -219,6 +220,14 @@ function startDraw()
     G.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
   end
 
+  for i = 1, #bosses do
+    local boss = bosses[i].sprite
+    local rotate = bosses[i].rotate()
+    G.draw(boss.image, boss.x, boss.y, rotate, 1, 1,
+    boss.width / 2, boss.height / 2
+  )
+  end
+
   drawFog()
   camera:unset()
 end
@@ -231,6 +240,7 @@ end
 function startUpdate(dt)
   player:update(dt)
   moveZombie(dt)
+  moveBoss(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
   shot(dt)

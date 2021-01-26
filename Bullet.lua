@@ -92,6 +92,16 @@ function shooting()
       end
     end
   end
+  for i, boss in ipairs(bosses) do
+    for j = 1, #bullets do
+      local bullet = bullets[j]
+      if isHit(bullet.sprite, boss.sprite, false, true) then
+        bullet.isVisible = false
+        boss.getDamage(bosses, i, player.damage)
+        break
+      end
+    end
+  end
   for j, bullet in ipairs(bullets) do
     if not bullet.isVisible or bulletIsOut(bullet) then
       table.remove(bullets, j)
@@ -99,9 +109,10 @@ function shooting()
   end
 end
 
-function isHit(bullet, sprite, isZombieShoot)
+function isHit(bullet, sprite, isZombieShoot, isBossGetShot)
   local hitbox = 8
   if not isZombieShoot then hitbox = 10 end
+  if isBossGetShot then hitbox = 20 end
   return math.abs(bullet.x - sprite.x) < 5 * hitbox
   and math.abs(bullet.y - sprite.y) < 5 * hitbox
 end
