@@ -1,7 +1,8 @@
+speedBullet = 500
+
 function Bullet (_sprite)
   local self = {
     sprite = _sprite,
-    speed = 500,
     isVisible = true,
     shotSound = love.audio.newSource("Audio/Shot.mp3", "static")
   }
@@ -30,8 +31,8 @@ function Bullet (_sprite)
 
   -- movement
   function self.move(dt)
-    local dx = self.speed * dt
-    local dy = self.speed * dt
+    local dx = speedBullet * dt
+    local dy = speedBullet * dt
 
     if math.abs(self.x) > math.abs(self.y) then
       dy = dy * math.abs(self.y/self.x)
@@ -109,4 +110,8 @@ function bulletIsOut(bullet)
   b.x < 0 or
   b.y > getHeightMap() or
   b.y < 0
+end
+
+function addSpeedBullet()
+  speedBullet = speedBullet + 25
 end

@@ -54,3 +54,7 @@ end
 function player:addMove()
   self.speed = self.speed + 10
 end
+
+function player:addDamage()
+  self.damage = self.damage + 10
+end
