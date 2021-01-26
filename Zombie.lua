@@ -1,9 +1,12 @@
-function Zombie(_sprite, _speed, _HP, _money)
+function Zombie(_sprite, _speed, _HP, _money, _canShooting)
   local self = {
     sprite = _sprite,
     speed = _speed,
     HP = _HP,
     money = _money,
+    canShooting = _canShooting,
+    lastShotTime = 0,
+    bullets = {},
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
@@ -15,7 +18,7 @@ function Zombie(_sprite, _speed, _HP, _money)
   end
 
   -- movement
-  function self.move(dt, zombies)
+  function self.move(dt, zombies, zombie)
     local newX = 0
     local newY = 0
     -- horizontal movement
@@ -34,6 +37,13 @@ function Zombie(_sprite, _speed, _HP, _money)
       end
     else
       newY = self.sprite.y
+    end
+
+    if math.abs(self.sprite.x - player.x) < 500  and math.abs(self.sprite.y - player.y) then
+      if self.canShooting then
+        zombieShot(dt, zombie)
+        zombieShooting()
+      end
     end
 
     self.sprite.x = newX
@@ -75,7 +85,10 @@ function moveZombie(dt)
   for i = 1, #zombies do
     local zombie = zombies[i]
     local t = copyTable(zombies, i)
-    zombie.move(dt, t)
+    zombie.move(dt, t, zombie)
+    for j = 1, #zombie.bullets do
+      zombie.bullets[j].move(dt)
+    end
   end
 end
 
@@ -90,13 +103,13 @@ function copyTable(old, n)
 end
 
 -- spawn zombies
-function spawnZombies(count, image, speed, HP, distance, money)
+function spawnZombies(count, image, speed, HP, distance, money, canShooting)
   for i = 1, count do
-      local zombieSprite = Sprite(image)
-      local zombie = Zombie(zombieSprite, speed, HP, money)
-      local position = randomPosition(distance)
-      zombie.initPosition(position.x, position.y)
-      table.insert(zombies, zombie)
+    local zombieSprite = Sprite(image)
+    local zombie = Zombie(zombieSprite, speed, HP, money, canShooting)
+    local position = randomPosition(distance)
+    zombie.initPosition(position.x, position.y)
+    table.insert(zombies, zombie)
   end
 end
 
@@ -110,6 +123,42 @@ function randomPosition(d)
   else
     self.x = love.math.random(-500 - d, -100 - d)
   end
-    self.y = love.math.random(-400, getHeightMap() - 400)
+  self.y = love.math.random(-400, getHeightMap() - 400)
   return self
+end
+
+-- zombie shot
+function zombieShot(dt, zombie)
+  local timeOut = (love.timer.getTime() - zombie.lastShotTime) * 1000
+  if timeOut >= 1000 then
+    local bulletSprite = Sprite(bulletImg)
+    local bullet = Bullet(bulletSprite)
+    bullet.initPosition(zombie.sprite, true)
+    table.insert(zombie.bullets, bullet)
+    zombie.lastShotTime = love.timer.getTime()
+  end
+end
+
+function zombieShooting()
+  for i, zombie in ipairs(zombies) do
+    if zombie.canShooting then
+      for j = 1, #zombie.bullets do
+        local bullet = zombie.bullets[j]
+        if isHit(bullet.sprite, player, true) then
+          bullet.isVisible = false
+          currentHealth = health.loseLife(1)
+          break
+        end
+      end
+    end
+  end
+  for i = 1, #zombies do
+    if zombies[i].canShooting then
+      for j, bullet in ipairs(zombies[i].bullets) do
+        if not bullet.isVisible or bulletIsOut(bullet) then
+          table.remove(zombies[i].bullets, j)
+        end
+      end
+    end
+  end
 end
