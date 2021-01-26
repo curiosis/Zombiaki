@@ -24,6 +24,7 @@ function Injure(_player, _playerX, _playerY)
           local timeOut = (love.timer.getTime() - boss.lastHitTime) * 1000
           if timeOut >= 500 then
             currentHealth = health.loseLife(1)
+            boss.shotCounter = 5
             boss.lastHitTime = love.timer.getTime()
           end
           break

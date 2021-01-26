@@ -27,25 +27,28 @@ function Boss(_sprite, _speed, _HP, _money)
 
     if self.canRun() then
       if self.shotCounter < 5 then
-        speed = player.speed
+        speed = player.speed - 25
       end
     else
       self.shotCounter = 0
     end
 
+    local rx = love.math.random(999, 1001) / 1000
+    local ry = love.math.random(999, 1001) / 1000
+
     -- horizontal movement
     if self.sprite.x <= player.x then
-      newX = self.sprite.x + (speed * dt)
+      newX = self.sprite.x + (speed * dt) * rx
     else
-      newX = self.sprite.x - (speed * dt)
+      newX = self.sprite.x - (speed * dt) * rx
     end
 
     -- vertical movement
     if math.abs(self.sprite.x - player.x) < 800 then
       if self.sprite.y <= player.y then
-        newY = self.sprite.y + (speed * dt)
+        newY = self.sprite.y + (speed * dt) * ry
       else
-        newY = self.sprite.y - (speed * dt)
+        newY = self.sprite.y - (speed * dt) * ry
       end
     else
       newY = self.sprite.y
@@ -63,8 +66,8 @@ function Boss(_sprite, _speed, _HP, _money)
   end
 
   function self.canRun()
-    return math.abs(player.x - self.sprite.x) < 400
-    and math.abs(player.y - self.sprite.y) < 400
+    return math.abs(player.x - self.sprite.x) < 350
+    and math.abs(player.y - self.sprite.y) < 350
   end
 
   -- rotate
