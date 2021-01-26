@@ -3,6 +3,8 @@ require "Zombie"
 require "Shop"
 
 local G = love.graphics
+local T = love.timer
+local K = love.keyboard
 
 local lastAlertTime = 0
 isAlive = true
@@ -29,9 +31,9 @@ function UIDraw()
   G.print(waveString .. wave.currentWave, 1000, 650)
   G.print(killsString .. kills, 50, 650)
 
-  alertResult = (love.timer.getTime() - lastAlertTime) * 1000
+  alertResult = (T.getTime() - lastAlertTime) * 1000
   if alertResult >= 2000 then
-    lastAlertTime = love.timer.getTime()
+    lastAlertTime = T.getTime()
     alert = ""
   end
 
@@ -43,7 +45,7 @@ function UIDraw()
 
   if not isAlive and not isWinner then
     gameOverDraw()
-    if love.keyboard.isDown('space') then
+    if K.isDown('space') then
       currentHealth = maxHealth
       health = Health()
       startLoad()
