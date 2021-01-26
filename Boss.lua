@@ -6,6 +6,7 @@ function Boss(_sprite, _speed, _HP, _money)
     speed = _speed,
     HP = _HP,
     money = _money,
+    lastHitTime = 0,
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }

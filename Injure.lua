@@ -17,6 +17,19 @@ function Injure(_player, _playerX, _playerY)
         end
       end
     end
+    for i, boss in ipairs(bosses) do
+      for j = 1, #bosses do
+        local boss = bosses[j]
+        if isInjured(boss.sprite) then
+          local timeOut = (love.timer.getTime() - boss.lastHitTime) * 1000
+          if timeOut >= 500 then
+            currentHealth = health.loseLife(1)
+            boss.lastHitTime = love.timer.getTime()
+          end
+          break
+        end
+      end
+    end
   end
 
   -- checks if player is near zombie
