@@ -1,4 +1,5 @@
-MAX_WAVES = 20
+MAX_WAVES = 2
+wasBossSpawn = false
 
 function Wave()
   local self = {
@@ -7,10 +8,12 @@ function Wave()
 
   function self.start()
     if self.currentWave < MAX_WAVES then
-      if #zombies == 0 then
+      if #zombies == 0 and #bosses == 0 then
         self.currentWave = self.currentWave + 1
         self.newWave()
       end
+    elseif not wasBossSpawn and #zombies == 0 and #bosses == 0 then
+      self.spawnBoss()
     end
   end
 
@@ -28,16 +31,18 @@ function Wave()
       4 + w)                  -- money
 
     -- spawn default zombies but farther
+    local far = 1000
+    if w > 4 then far = 3000 end
     spawnZombies(
       w + 1,
       defaultZombieImg,
       calcSpeed(100, w, 20),
       calcHP(100, w),
-      calcDist(3000, w),
+      calcDist(far, w),
       4 + w)
 
     -- spawn default zombies buuuut farther
-    if self.currentWave >= 5 then
+    if w >= 5 then
       spawnZombies(
       w,
       defaultZombieImg,
@@ -59,7 +64,7 @@ function Wave()
 
     -- STRONGER
     -- spawn stronger zombies but farther
-    if self.currentWave >= 5 then
+    if w >= 5 then
       spawnZombies(
       w,
       strongZombieImg,
@@ -88,6 +93,51 @@ function Wave()
       calcDist(300, w),
       19 + w,
       true)
+  end
+
+  function self.spawnBoss()
+    BOSS_HP = 10000
+    wasBossSpawn = true
+    spawnBoss(bossImage, 100, BOSS_HP, 200, getWidthMap() / 2, 0)
+
+    -- STRONGER
+    spawnZombies(10,
+      strongZombieImg,
+      150, 300, 200, 25)
+
+    spawnZombies(15,
+      strongZombieImg,
+      150, 300, 2000, 25)
+
+    spawnZombies(20,
+      strongZombieImg,
+      150, 300, 5000, 25)
+
+    -- FASTER
+    spawnZombies(10,
+      fastZombieImg,
+      250, 200, 500, 25)
+
+    spawnZombies(10,
+      fastZombieImg,
+      250, 200, 2500, 25)
+
+    spawnZombies(15,
+      fastZombieImg,
+      250, 200, 5000, 25)
+
+    -- SHOOTING
+    spawnZombies(5,
+      shootZombieImg,
+      150, 200, 500, 25, true)
+
+    spawnZombies(7,
+      shootZombieImg,
+      150, 200, 2500, 25, true)
+
+    spawnZombies(10,
+      shootZombieImg,
+      150, 200, 4000, 25, true)
   end
   return self
 end

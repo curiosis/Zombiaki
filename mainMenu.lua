@@ -7,6 +7,7 @@ require "Zombie"
 require "Injure"
 require "Bullet"
 require "Wave"
+require "Boss"
 
 -- local player
 local playerX
@@ -24,8 +25,6 @@ local screenResH = 720
 local playerRot
 local injure
 
-bullets = {}
-zombies = {}
 wave = Wave()
 kills = 0
 lastShotTime = 0
@@ -195,6 +194,7 @@ function startLoad()
   fastZombieImg = G.newImage('Sprites/Zombie3.png')
   strongZombieImg = G.newImage('Sprites/Zombie2.png')
   shootZombieImg = G.newImage('Sprites/Zombie4.png')
+  bossImage = G.newImage('Sprites/Zombie.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
@@ -223,6 +223,14 @@ function startDraw()
     G.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
   end
 
+  for i = 1, #bosses do
+    local boss = bosses[i].sprite
+    local rotate = bosses[i].rotate()
+    G.draw(boss.image, boss.x, boss.y, rotate, 1, 1,
+    boss.width / 2, boss.height / 2)
+    bosses[i].displayHP()
+  end
+
   drawFog()
   camera:unset()
 end
@@ -235,6 +243,7 @@ end
 function startUpdate(dt)
   player:update(dt)
   moveZombie(dt)
+  moveBoss(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
   shot(dt)
