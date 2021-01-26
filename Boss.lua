@@ -11,14 +11,15 @@ function Boss(_sprite, _speed, _HP, _money)
     shotCounter = 0,
     hpSprite = love.graphics.newImage('Sprites/HP.png'),
     hpBorder = love.graphics.newImage('Sprites/HP_border.png'),
-    deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
-    hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
+    hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static"),
+    initSound = love.audio.newSource("Audio/Zombie-boss-init.mp3", "static")
   }
 
   -- init position
   function self.initPosition(x, y)
     self.sprite.x = x
     self.sprite.y = y
+    self.playSoundEffecInitt()
   end
 
   -- movement
@@ -113,12 +114,16 @@ function Boss(_sprite, _speed, _HP, _money)
 
   -- sound effects
   function self.playSoundEffectDeath()
-    self.deathSound:setVolume(0.2)
-    self.deathSound:play()
+    self.initSound:setVolume(1)
+    self.initSound:play()
   end
   function self.playSoundEffectHit()
-    self.hitSound:setVolume(0.35)
+    self.hitSound:setVolume(0.6)
     self.hitSound:play()
+  end
+  function self.playSoundEffecInitt()
+    self.initSound:setVolume(1)
+    self.initSound:play()
   end
 
   return self

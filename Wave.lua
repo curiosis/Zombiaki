@@ -93,7 +93,6 @@ function Wave()
       calcDist(300, w),
       19 + w,
       true)
-
   end
 
   function self.spawnBoss()
