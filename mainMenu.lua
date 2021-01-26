@@ -74,7 +74,7 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Start Game",
   function()
-    _G.map = loadMap("Map/map")
+    _G.map = loadMap("Map/map1")
     start = true
   end))
 
