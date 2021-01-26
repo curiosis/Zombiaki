@@ -191,7 +191,10 @@ end
 
 function startLoad()
   print("start")
-  defaultZombieImg = G.newImage('Sprites/Zombie.png')
+  defaultZombieImg = G.newImage('Sprites/Zombie1.png')
+  fastZombieImg = G.newImage('Sprites/Zombie3.png')
+  strongZombieImg = G.newImage('Sprites/Zombie2.png')
+  shootZombieImg = G.newImage('Sprites/Zombie4.png')
   bulletImg = G.newImage('Sprites/Bullet.jpg')
 end
 
