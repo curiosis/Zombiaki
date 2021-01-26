@@ -96,47 +96,47 @@ function Wave()
   end
 
   function self.spawnBoss()
-    BOSS_HP = 2000
+    BOSS_HP = 10000
     wasBossSpawn = true
     spawnBoss(bossImage, 100, BOSS_HP, 200, getWidthMap() / 2, 0)
 
     -- STRONGER
     spawnZombies(10,
-      defaultZombieImg,
+      strongZombieImg,
       150, 300, 200, 25)
 
     spawnZombies(15,
-      defaultZombieImg,
+      strongZombieImg,
       150, 300, 2000, 25)
 
     spawnZombies(20,
-      defaultZombieImg,
+      strongZombieImg,
       150, 300, 5000, 25)
 
     -- FASTER
     spawnZombies(10,
-      defaultZombieImg,
+      fastZombieImg,
       250, 200, 500, 25)
 
-    spawnZombies(15,
-      defaultZombieImg,
+    spawnZombies(10,
+      fastZombieImg,
       250, 200, 2500, 25)
 
-    spawnZombies(20,
-      defaultZombieImg,
+    spawnZombies(15,
+      fastZombieImg,
       250, 200, 5000, 25)
 
     -- SHOOTING
     spawnZombies(5,
-      defaultZombieImg,
+      shootZombieImg,
       150, 200, 500, 25, true)
 
-    spawnZombies(10,
-      defaultZombieImg,
+    spawnZombies(7,
+      shootZombieImg,
       150, 200, 2500, 25, true)
 
     spawnZombies(10,
-      defaultZombieImg,
+      shootZombieImg,
       150, 200, 4000, 25, true)
   end
   return self
