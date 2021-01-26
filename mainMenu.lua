@@ -7,6 +7,7 @@ require "Zombie"
 require "Injure"
 require "Bullet"
 require "Wave"
+require "Boss"
 
 -- local player
 local playerX
@@ -24,8 +25,6 @@ local screenResH = 720
 local playerRot
 local injure
 
-bullets = {}
-zombies = {}
 wave = Wave()
 kills = 0
 lastShotTime = 0

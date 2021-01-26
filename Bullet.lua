@@ -1,5 +1,6 @@
 speedBullet = 500
 currentTimeOut = 500
+bullets = {}
 
 function Bullet (_sprite)
   local self = {

@@ -1,3 +1,5 @@
+zombies = {}
+
 function Zombie(_sprite, _speed, _HP, _money, _canShooting)
   local self = {
     sprite = _sprite,
@@ -51,7 +53,7 @@ function Zombie(_sprite, _speed, _HP, _money, _canShooting)
     self.sprite.y = newY
   end
 
-  -- init position
+  -- rotate
   function self.rotate()
     return math.atan2((player.y - self.sprite.y), (player.x - self.sprite.x))
   end
