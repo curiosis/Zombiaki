@@ -56,7 +56,7 @@ function Wave()
     -- spawn stronger zombies
     spawnZombies(
       w - 3,
-      defaultZombieImg,
+      strongZombieImg,
       80,
       calcHP(200, w),
       200,
@@ -67,7 +67,7 @@ function Wave()
     if w >= 5 then
       spawnZombies(
       w,
-      defaultZombieImg,
+      strongZombieImg,
       80,
       calcHP(200, w),
       calcDist(2000, w),
@@ -78,7 +78,7 @@ function Wave()
     -- spawn faster zombies
     spawnZombies(
       w - 5,
-      defaultZombieImg,
+      fastZombieImg,
       calcSpeed(180, w, 50),
       100,
       calcDist(1200, w),
@@ -87,7 +87,7 @@ function Wave()
     -- SHOOTING
     spawnZombies(
       math.floor(w / 2),
-      defaultZombieImg,
+      shootZombieImg,
       calcSpeed(60, w, 50),
       200,
       calcDist(300, w),
