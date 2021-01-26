@@ -7,6 +7,7 @@ function Boss(_sprite, _speed, _HP, _money)
     HP = _HP,
     money = _money,
     lastHitTime = 0,
+    shotCounter = 0,
     deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
     hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
   }
@@ -25,7 +26,11 @@ function Boss(_sprite, _speed, _HP, _money)
     local speed = self.speed
 
     if self.canRun() then
-      speed = self.speed * 2
+      if self.shotCounter < 5 then
+        speed = player.speed
+      end
+    else
+      self.shotCounter = 0
     end
 
     -- horizontal movement
@@ -36,7 +41,7 @@ function Boss(_sprite, _speed, _HP, _money)
     end
 
     -- vertical movement
-    if math.abs(self.sprite.x - player.x) < 600 then
+    if math.abs(self.sprite.x - player.x) < 800 then
       if self.sprite.y <= player.y then
         newY = self.sprite.y + (speed * dt)
       else
@@ -58,8 +63,8 @@ function Boss(_sprite, _speed, _HP, _money)
   end
 
   function self.canRun()
-    return math.abs(player.x - self.sprite.x) < 300
-    and math.abs(player.y - self.sprite.y) < 300
+    return math.abs(player.x - self.sprite.x) < 400
+    and math.abs(player.y - self.sprite.y) < 400
   end
 
   -- rotate
@@ -70,6 +75,9 @@ function Boss(_sprite, _speed, _HP, _money)
   -- get damage
   function self.getDamage(bosses, i, damage)
     self.HP = self.HP - damage
+    if self.canRun then
+      self.shotCounter = self.shotCounter + 1
+    end
     if(self.HP <= 0) then
       table.remove(bosses, i)
       Shop().addMonets(self.money)

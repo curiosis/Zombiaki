@@ -89,7 +89,7 @@ function Wave()
     --   19 + w,
     --   true)
 
-    spawnBoss(bossImage, 100, 1000, 200, getWidthMap() / 2, 0)
+    spawnBoss(bossImage, 100, 10000, 200, getWidthMap() / 2, 0)
   end
   return self
 end
