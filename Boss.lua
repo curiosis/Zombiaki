@@ -21,26 +21,45 @@ function Boss(_sprite, _speed, _HP, _money)
   function self.move(dt)
     local newX = 0
     local newY = 0
+
+    local speed = self.speed
+
+    if self.canRun() then
+      speed = self.speed * 2
+    end
+
     -- horizontal movement
     if self.sprite.x <= player.x then
-      newX = self.sprite.x + (self.speed * dt)
+      newX = self.sprite.x + (speed * dt)
     else
-      newX = self.sprite.x - (self.speed * dt)
+      newX = self.sprite.x - (speed * dt)
     end
 
     -- vertical movement
     if math.abs(self.sprite.x - player.x) < 600 then
       if self.sprite.y <= player.y then
-        newY = self.sprite.y + (self.speed * dt)
+        newY = self.sprite.y + (speed * dt)
       else
-        newY = self.sprite.y - (self.speed * dt)
+        newY = self.sprite.y - (speed * dt)
       end
     else
       newY = self.sprite.y
     end
 
-    self.sprite.x = newX
-    self.sprite.y = newY
+    if not self.isClose() then
+      self.sprite.x = newX
+      self.sprite.y = newY
+    end
+  end
+
+  function self.isClose()
+    return math.abs(player.x - self.sprite.x) < 50
+    and math.abs(player.y - self.sprite.y) < 50
+  end
+
+  function self.canRun()
+    return math.abs(player.x - self.sprite.x) < 300
+    and math.abs(player.y - self.sprite.y) < 300
   end
 
   -- rotate
