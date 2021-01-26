@@ -76,9 +76,21 @@ fog2,
 end
 
 function getWidthMap()
-  return 30*pix
+  if m1 or m2 then
+    return 30*pix
+  elseif m3 then
+    return 35*pix
+  elseif mA then
+    return 40*pix
+  end
 end
 
 function getHeightMap()
-  return 20*pix
+  if m1 or m2 then
+    return 20*pix
+  elseif m3 then
+    return 25*pix
+  elseif mA then
+    return 40*pix
+  end
 end
