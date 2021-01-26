@@ -20,7 +20,7 @@ function Wave()
     spawnZombies(
       w + 3,                  -- count
       defaultZombieImg,       -- img
-      calcSpeed(100, w, 20),  -- speed
+      calcSpeed(100, w, 50),  -- speed
       calcHP(100, w),         -- HP
       100,                    -- distance
       10)                     -- money
@@ -39,7 +39,7 @@ function Wave()
       spawnZombies(
       w + 5,
       defaultZombieImg,
-      calcSpeed(100, w, 20),
+      calcSpeed(100, w, 100),
       calcHP(100, w),
       calcDist(4000, w),
       10)
