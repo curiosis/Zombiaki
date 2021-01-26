@@ -38,6 +38,8 @@ BUTTON_HEIGHT = 56
 _G.about = false
 _G.start = false
 _G.arena = false
+_G.credits = false
+
 _G.map = nil
 _G.m1 = false
 _G.m2 = false
@@ -61,12 +63,14 @@ local mainMenuBackgroundAudio = nil
 local buttonHoverSoundEffect = nil
 local backgroundMM = nil
 local aboutPanel = nil
+local creditsPanel = nil
 
 function menuLoad()
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
   backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
   aboutPanel = G.newImage('Sprites/AboutPanel.png')
+  creditsPanel = G.newImage('Sprites/CreditsPanel.png')
 
   mainMenuBackgroundAudio = A.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
   buttonHoverSoundEffect = A.newSource("Audio/buttonHover.mp3", "static")
@@ -96,6 +100,7 @@ function menuLoad()
   table.insert(buttons, newButton(
   "About",
   function()
+    credits = false
     if about then
       about = false
     else
@@ -106,7 +111,12 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Credits",
   function()
-    print("Credits page")
+    about = false
+    if credits then
+      credits = false
+    else
+      credits = true
+    end
   end))
 
   table.insert(buttons, newButton(
@@ -188,6 +198,10 @@ end
 
 function aboutDraw()
   G.draw(aboutPanel, 50, 100)
+end
+
+function creditsDraw()
+  G.draw(creditsPanel, 50, 100)
 end
 
 function startLoad()

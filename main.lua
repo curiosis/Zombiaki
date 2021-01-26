@@ -23,6 +23,9 @@ function love.draw()
   elseif about then
     menuDraw()
     aboutDraw()
+  elseif credits then
+    menuDraw()
+    creditsDraw()
   else
     menuDraw()
   end
