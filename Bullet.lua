@@ -8,17 +8,25 @@ function Bullet (_sprite)
   }
 
   -- init position
-  function self.initPosition()
-    self.sprite.x = player.x
-    self.sprite.y = player.y
+  function self.initPosition(sprite, isZombie)
+    self.sprite.x = sprite.x
+    self.sprite.y = sprite.y
 
+    -- if player shots
     local mX = love.mouse.getX() + camera.x
     local mY = love.mouse.getY() + camera.y
 
-    self.dir = math.atan2(mY - player.y, mX - player.x)
+    -- if zombie shots
+    if isZombie then
+      mX = player.x
+      mY = player.y
+      self.speed = 350
+    end
 
-    self.x = mX - player.x
-    self.y = mY - player.y
+    self.dir = math.atan2(mY - sprite.y, mX - sprite.x)
+
+    self.x = mX - sprite.x
+    self.y = mY - sprite.y
   end
 
   -- movement
@@ -61,7 +69,7 @@ function shot(dt)
     Bullet().playSoundEffectShot()
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
-    bullet.initPosition()
+    bullet.initPosition(player)
     table.insert(bullets, bullet)
     lastShotTime = love.timer.getTime()
   end
@@ -83,15 +91,25 @@ function shooting()
     end
   end
   for j, bullet in ipairs(bullets) do
-    if not bullet.isVisible then
+    if not bullet.isVisible or bulletIsOut(bullet) then
       table.remove(bullets, j)
     end
   end
 end
 
-function isHit(bullet, zombie)
-  return math.abs(bullet.x - zombie.x) < 50
-  and math.abs(bullet.y - zombie.y) < 50
+function isHit(bullet, sprite, isZombieShoot)
+  local hitbox = 8
+  if not isZombieShoot then hitbox = 10 end
+  return math.abs(bullet.x - sprite.x) < 5 * hitbox
+  and math.abs(bullet.y - sprite.y) < 5 * hitbox
+end
+
+function bulletIsOut(bullet)
+  local b = bullet.sprite
+  return b.x > getWidthMap() or
+  b.x < 0 or
+  b.y > getHeightMap() or
+  b.y < 0
 end
 
 function addSpeedBullet()

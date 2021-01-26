@@ -192,7 +192,14 @@ function startDraw()
     G.draw(
     zombie.image, zombie.x, zombie.y, rotate, 1, 1,
     zombie.width / 2, zombie.height / 2)
-  end
+
+  if zombies[i].canShooting then
+        for j = 1, #zombies[i].bullets do
+          local bullet = zombies[i].bullets[j]
+          G.draw(bullet.sprite.image, bullet.sprite.x, bullet.sprite.y)
+        end
+      end
+    end
 
   for i = 1, #bullets do
     local bullet = bullets[i]
