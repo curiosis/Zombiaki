@@ -76,6 +76,7 @@ function menuLoad()
   "Story Mode",
   function()
     _G.map = loadMap("Map/map1")
+    m1 = true
     start = true
   end))
 
@@ -83,6 +84,7 @@ function menuLoad()
   "Endless mode",
   function()
     _G.map = loadMap("Map/mapArena")
+    m2 = true
     print("Arena")
   end))
 
