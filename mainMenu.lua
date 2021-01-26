@@ -17,8 +17,10 @@ local speed = 300
 local background
 local background_quad
 
-local windowMode
 local G = love.graphics
+local M = love.mouse
+local E = love.event
+local A = love.audio
 
 local screenResW = 1280
 local screenResH = 720
@@ -66,8 +68,8 @@ function menuLoad()
   backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
   aboutPanel = G.newImage('Sprites/AboutPanel.png')
 
-  mainMenuBackgroundAudio = love.audio.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
-  buttonHoverSoundEffect = love.audio.newSource("Audio/buttonHover.mp3", "static")
+  mainMenuBackgroundAudio = A.newSource("Audio/Royalty Free Music - Zombie Apocalypse - Scary Cinematic Industrial Action Background Music.mp3","stream")
+  buttonHoverSoundEffect = A.newSource("Audio/buttonHover.mp3", "static")
 
   mainMenuBackgroundAudio:setVolume(0.3)
   buttonHoverSoundEffect:setPitch(0.35)
@@ -110,7 +112,7 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Quit",
   function()
-    love.event.quit(0)
+    E.quit(0)
   end))
 end
 
@@ -118,8 +120,8 @@ function menuDraw()
 
   G.draw(backgroundMM,0,0)
 
-  local ww = love.graphics.getWidth()
-  local wh = love.graphics.getHeight() + 300
+  local ww = G.getWidth()
+  local wh = G.getHeight() + 300
 
   local button_width = ww * (1/3)
 
@@ -135,7 +137,7 @@ function menuDraw()
 
     local color = {0.1, 0.1, 0.1, 1.0}
 
-    local mouseXPos, mouseYPos = love.mouse.getPosition()
+    local mouseXPos, mouseYPos = M.getPosition()
 
     local hover = mouseXPos > bx and
     mouseXPos < bx + button_width and
@@ -147,41 +149,41 @@ function menuDraw()
       bx = bx - 60
     end
 
-    button.now = love.mouse.isDown(1)
+    button.now = M.isDown(1)
     if button.now and not button.last and hover then
       buttonHoverSoundEffect:play()
       button.fn()
     end
 
-    love.graphics.setColor(unpack(color))
-    love.graphics.rectangle("fill",bx,by,button_width, BUTTON_HEIGHT)
+    G.setColor(unpack(color))
+    G.rectangle("fill",bx,by,button_width, BUTTON_HEIGHT)
 
 
-    love.graphics.setColor(0, 0, 0, 1)
+    G.setColor(0, 0, 0, 1)
 
     local textW = font:getWidth(button.text)
     local textH = font:getHeight(button.text)
 
     if hover then
-      love.graphics.print(
-      button.text,
-      font,
-      (ww * 0.7) - textW * 0.5 - 60,
-      by + textH * 0.5
-    )
-  else
-    love.graphics.print(
-    button.text,
-    font,
-    (ww * 0.7) - textW * 0.5,
-    by + textH * 0.5
-  )
-end
+      G.print(
+        button.text,
+        font,
+        (ww * 0.7) - textW * 0.5 - 60,
+        by + textH * 0.5
+      )
+    else
+      G.print(
+        button.text,
+        font,
+        (ww * 0.7) - textW * 0.5,
+        by + textH * 0.5
+      )
+    end
 
-cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
+    cursor_y = cursor_y + (BUTTON_HEIGHT + margin)
 
-end
-love.graphics.setColor(1, 1, 1, 1)
+  end
+  G.setColor(1, 1, 1, 1)
 end
 
 function aboutDraw()
@@ -236,8 +238,8 @@ function startDraw()
 end
 
 function gameOverDraw()
-  backgroundGameOver = love.graphics.newImage('Sprites/gameover.png')
-  love.graphics.draw(backgroundGameOver,0,0)
+  backgroundGameOver = G.newImage('Sprites/gameover.png')
+  G.draw(backgroundGameOver,0,0)
 end
 
 function startUpdate(dt)
