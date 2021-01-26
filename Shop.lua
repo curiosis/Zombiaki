@@ -1,6 +1,8 @@
 require "Health"
 require "Player"
 
+local K = love.keyboard
+
 function Shop()
   local self = {
     open_shop = false,
@@ -12,13 +14,13 @@ function Shop()
 
 
   function self.keys()
-    if love.keyboard.isDown('q') then
+    if K.isDown('q') then
       shop_open = true
     else
       shop_open = false
     end
 
-    if love.keyboard.isDown('1') then
+    if K.isDown('1') then
       function love.keyreleased(key)
         if key == "1" and monets >= 250 and health.current < maxHealth then
           health.addLife()
@@ -32,7 +34,7 @@ function Shop()
       end
     end
 
-    if love.keyboard.isDown('2') then
+    if K.isDown('2') then
       function love.keyreleased(key)
         if key == "2" and monets >= 250 and player.speed < 350 then
           player:addMove()
@@ -46,7 +48,7 @@ function Shop()
       end
     end
 
-    if love.keyboard.isDown('3') then
+    if K.isDown('3') then
       function love.keyreleased(key)
         if key == "3" and monets >= 300 and player.damage < 200 then
           player:addDamage()
@@ -60,7 +62,7 @@ function Shop()
       end
     end
 
-    if love.keyboard.isDown('4') then
+    if K.isDown('4') then
       function love.keyreleased(key)
         if key == "4" and monets >= 300 and speedBullet < 600 then
           addSpeedBullet()
