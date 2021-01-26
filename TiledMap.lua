@@ -1,7 +1,5 @@
 _G.pix = 56
 
-
-
 local fog1 = love.graphics.newImage("Sprites/fog_01.png")
 local fog2 = love.graphics.newImage("Sprites/fog_01.png")
 
