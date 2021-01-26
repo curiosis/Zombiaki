@@ -36,7 +36,7 @@ BUTTON_HEIGHT = 56
 _G.about = false
 _G.start = false
 _G.arena = false
-
+_G.map = nil
 _G.m1 = false
 _G.m2 = false
 _G.m3 = false
@@ -78,8 +78,8 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Story Mode",
   function()
-    _G.map = loadMap("Map/map2")
-    m2 = true
+    map = loadMap("Map/map1")
+    m1 = true
     start = true
   end))
 
@@ -87,7 +87,7 @@ function menuLoad()
   "Endless mode",
   function()
     mA = true
-    _G.map = loadMap("Map/mapArena")
+    map = loadMap("Map/mapArena")
     arena = true
   end))
 
