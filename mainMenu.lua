@@ -266,3 +266,8 @@ function startUpdate(dt)
   shooting()
   wave.start()
 end
+
+function backToMainMenu()
+  start = false
+  arena = false
+end

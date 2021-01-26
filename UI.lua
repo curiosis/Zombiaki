@@ -20,18 +20,20 @@ local shop2
 local coin
 local dark
 
-function UIDraw()
+function UIDraw(hiden)
   G.draw(dark,0,0)
-  health.drawHearts()
-  G.draw(shop2, 320, 550)
-  G.draw(coin, 1210, 12)
-  G.setNewFont(28)
-  G.print(monets, 1150, 20)
-  G.print(alert, 10, 500)
-  G.print(zombiesString .. #zombies, 900, 20)
-  G.setNewFont(40)
-  G.print(waveString .. wave.currentWave, 1000, 650)
-  G.print(killsString .. kills, 50, 650)
+  if not hiden then
+    health.drawHearts()
+    G.draw(shop2, 320, 550)
+    G.draw(coin, 1210, 12)
+    G.setNewFont(28)
+    G.print(monets, 1150, 20)
+    G.print(alert, 10, 500)
+    G.print(zombiesString .. #zombies, 900, 20)
+    G.setNewFont(40)
+    G.print(waveString .. wave.currentWave, 1000, 650)
+    G.print(killsString .. kills, 50, 650)
+  end
 
   alertResult = (T.getTime() - lastAlertTime) * 1000
   if alertResult >= 2000 then
