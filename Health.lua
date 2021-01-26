@@ -1,14 +1,17 @@
+local G = love.graphics
+local A = love.audio
+
 function Health()
   local self = {
     current = currentHealth,
-    heart = love.graphics.newImage('Sprites/Heart.png'),
-    loseLifeSoundEffect = love.audio.newSource("Audio/Sigh.mp3", "static")
+    heart = G.newImage('Sprites/Heart.png'),
+    loseLifeSoundEffect = A.newSource("Audio/Sigh.mp3", "static")
   }
 
   function self.drawHearts()
     for i=1, self.current do
       local x = 20 + 80 * (i-1)
-      love.graphics.draw(self.heart, x, 20)
+      G.draw(self.heart, x, 20)
     end
   end
 
