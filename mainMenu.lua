@@ -37,6 +37,7 @@ BUTTON_HEIGHT = 56
 
 _G.about = false
 _G.start = false
+_G.arena = false
 
 local
 function newButton(text, fn)
@@ -72,10 +73,17 @@ function menuLoad()
   mainMenuBackgroundAudio:play()
 
   table.insert(buttons, newButton(
-  "Start Game",
+  "Story Mode",
   function()
     _G.map = loadMap("Map/map1")
     start = true
+  end))
+
+  table.insert(buttons, newButton(
+  "Endless mode",
+  function()
+    _G.map = loadMap("Map/mapArena")
+    print("Arena")
   end))
 
   table.insert(buttons, newButton(
