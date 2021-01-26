@@ -1,9 +1,6 @@
 _G.pix = 56
 
-_G.m1 = false
-_G.m2 = false
-_G.m3 = false
-_G.mA = false
+
 
 local fog1 = love.graphics.newImage("Sprites/fog_01.png")
 local fog2 = love.graphics.newImage("Sprites/fog_01.png")
@@ -15,7 +12,11 @@ function loadMap(path)
   local tileset = map.tilesets[1]
   map.tileset = tileset
 
-  map.image = love.graphics.newImage("Map/Tileset.png")
+  if mA then
+    map.image = love.graphics.newImage("Map/TilesetArena.png")
+  else
+    map.image = love.graphics.newImage("Map/Tileset.png")
+  end
 
   for y=0, (tileset.imageheight / tileset.tileheight) - 1 do
     for x=0, (tileset.imagewidth / tileset.tilewidth) - 1 do

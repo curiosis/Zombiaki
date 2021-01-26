@@ -28,7 +28,7 @@ function love.load()
 end
 
 function love.update(dt)
-  if start then
+  if start or arena then
     startUpdate(dt)
   end
 
@@ -36,7 +36,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  if start then
+  if start or arena then
     startDraw()
     UIDraw()
   elseif about then
