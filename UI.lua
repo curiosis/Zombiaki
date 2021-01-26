@@ -50,10 +50,7 @@ function UIDraw(hiden)
   if not isAlive and not isWinner then
     gameOverDraw()
     if K.isDown('space') then
-      currentHealth = maxHealth
-      health = Health()
-      startLoad()
-      isAlive = true
+      love.event.quit('restart')
     end
   end
 end
