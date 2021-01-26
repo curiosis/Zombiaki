@@ -1,4 +1,4 @@
-MAX_WAVES = 2
+MAX_WAVES = 3
 wasBossSpawn = false
 
 function Wave()
@@ -10,6 +10,7 @@ function Wave()
     if self.currentWave < MAX_WAVES then
       if #zombies == 0 and #bosses == 0 then
         self.currentWave = self.currentWave + 1
+        changeMap(self.currentWave)
         self.newWave()
       end
     elseif not wasBossSpawn and #zombies == 0 and #bosses == 0 then
@@ -156,4 +157,9 @@ function calcHP(hp, w)
   else
     return hp
   end
+end
+
+function changeMap(waveNumber)
+  if waveNumber == 2 then map = loadMap("Map/map2") m1 = false m2 = true end
+  if waveNumber == 3 then map = loadMap("Map/map3") m2 = false m3 = true end
 end
