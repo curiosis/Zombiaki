@@ -268,6 +268,5 @@ function startUpdate(dt)
 end
 
 function backToMainMenu()
-  start = false
-  arena = false
+  E.quit('restart')
 end
