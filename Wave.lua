@@ -1,4 +1,3 @@
-MAX_WAVES = 15
 wasBossSpawn = false
 currentWave = 0
 
@@ -6,6 +5,11 @@ function Wave()
   local self = {}
 
   function self.start()
+    if mA then
+      MAX_WAVES = 999999
+    else
+      MAX_WAVES = 15
+    end
     if currentWave < MAX_WAVES then
       if #zombies == 0 and #bosses == 0 then
         currentWave = currentWave + 1
