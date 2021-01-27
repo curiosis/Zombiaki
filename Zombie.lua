@@ -130,7 +130,13 @@ function randomPosition(d)
   else
     self.x = MTH.random(-500 - d, -100 - d)
   end
-  self.y = MTH.random(-400, getHeightMap() - 400)
+  if currentWave < 6 then
+    self.y = MTH.random(-400, getHeightMap() - 400)
+  elseif currentWave < 11 then
+    self.y = MTH.random(-400, getHeightMap())
+  else
+    self.y = MTH.random(400, getHeightMap())
+  end
   return self
 end
 
