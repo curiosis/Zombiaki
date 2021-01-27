@@ -2,7 +2,9 @@ wasBossSpawn = false
 currentWave = 0
 
 function Wave()
-  local self = {}
+  local self = {
+    waveSoundEffect = love.audio.newSource("Audio/Wave.mp3", "static"),
+  }
 
   function self.start()
     if mA then
@@ -26,26 +28,27 @@ function Wave()
     local w = currentWave
     isNewWave = true
     waveInfo = "WAVE " .. currentWave
+    self.waveSoundEffect:play()
     -- DEFAULT
     -- spawn default zombies
     spawnZombies(
-      w + 3,                  -- count
-      defaultZombieImg,       -- img
-      calcSpeed(100, w, 50),  -- speed
-      calcHP(100, w),         -- HP
-      100,                    -- distance
-      4 + w)                  -- money
+    w + 3,                  -- count
+    defaultZombieImg,       -- img
+    calcSpeed(100, w, 50),  -- speed
+    calcHP(100, w),         -- HP
+    100,                    -- distance
+    4 + w)                  -- money
 
     -- spawn default zombies but farther
     local far = 1000
     if w > 4 then far = 3000 end
     spawnZombies(
-      w + 1,
-      defaultZombieImg,
-      calcSpeed(100, w, 20),
-      calcHP(100, w),
-      calcDist(far, w),
-      4 + w)
+    w + 1,
+    defaultZombieImg,
+    calcSpeed(100, w, 20),
+    calcHP(100, w),
+    calcDist(far, w),
+    4 + w)
 
     -- spawn default zombies buuuut farther
     if w >= 5 then
@@ -61,12 +64,12 @@ function Wave()
     -- STRONGER
     -- spawn stronger zombies
     spawnZombies(
-      w - 3,
-      strongZombieImg,
-      80,
-      calcHP(200, w),
-      200,
-      4 + w)
+    w - 3,
+    strongZombieImg,
+    80,
+    calcHP(200, w),
+    200,
+    4 + w)
 
     -- STRONGER
     -- spawn stronger zombies but farther
@@ -83,24 +86,24 @@ function Wave()
     -- FASTER
     -- spawn faster zombies
     spawnZombies(
-      w - 5,
-      fastZombieImg,
-      calcSpeed(180, w, 50),
-      100,
-      calcDist(1200, w),
-      9 + w)
+    w - 5,
+    fastZombieImg,
+    calcSpeed(180, w, 50),
+    100,
+    calcDist(1200, w),
+    9 + w)
 
     -- SHOOTING
     spawnZombies(
-      math.floor(w / 2),
-      shootZombieImg,
-      calcSpeed(60, w, 50),
-      200,
-      calcDist(300, w),
-      19 + w,
-      true)
+    math.floor(w / 2),
+    shootZombieImg,
+    calcSpeed(60, w, 50),
+    200,
+    calcDist(300, w),
+    19 + w,
+    true)
 
-      isNewWave = false
+    isNewWave = false
   end
 
   function self.spawnBoss()
@@ -110,42 +113,42 @@ function Wave()
 
     -- STRONGER
     spawnZombies(10,
-      strongZombieImg,
-      150, 300, 200, 25)
+    strongZombieImg,
+    150, 300, 200, 25)
 
     spawnZombies(15,
-      strongZombieImg,
-      150, 300, 2000, 25)
+    strongZombieImg,
+    150, 300, 2000, 25)
 
     spawnZombies(20,
-      strongZombieImg,
-      150, 300, 5000, 25)
+    strongZombieImg,
+    150, 300, 5000, 25)
 
     -- FASTER
     spawnZombies(10,
-      fastZombieImg,
-      250, 200, 500, 25)
+    fastZombieImg,
+    250, 200, 500, 25)
 
     spawnZombies(10,
-      fastZombieImg,
-      250, 200, 2500, 25)
+    fastZombieImg,
+    250, 200, 2500, 25)
 
     spawnZombies(15,
-      fastZombieImg,
-      250, 200, 5000, 25)
+    fastZombieImg,
+    250, 200, 5000, 25)
 
     -- SHOOTING
     spawnZombies(5,
-      shootZombieImg,
-      150, 200, 500, 25, true)
+    shootZombieImg,
+    150, 200, 500, 25, true)
 
     spawnZombies(7,
-      shootZombieImg,
-      150, 200, 2500, 25, true)
+    shootZombieImg,
+    150, 200, 2500, 25, true)
 
     spawnZombies(10,
-      shootZombieImg,
-      150, 200, 4000, 25, true)
+    shootZombieImg,
+    150, 200, 4000, 25, true)
   end
   return self
 end
