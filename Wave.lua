@@ -1,5 +1,5 @@
 wasBossSpawn = false
-currentWave = 0
+currentWave = 11
 
 function Wave()
   local self = {}

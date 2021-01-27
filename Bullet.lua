@@ -126,7 +126,17 @@ function bulletIsOut(bullet)
   return b.x > getWidthMap() or
   b.x < 0 or
   b.y > getHeightMap() or
-  b.y < 0
+  b.y < 0 or bulletWall(b)
+end
+
+function bulletWall(b)
+  if b.y <= 7 * 56 and (b.x <= 5.5 * 56 or (b.x >= 10.5 * 56 and b.x <= 24.5 * 56) or b.x >= 29 * 56) then
+    return true
+  end
+  if b.y <= 4.5 * 56 and (b.x >= 9.5 * 56 and b.x <= 26 * 56) then
+    return true
+  end
+  return false
 end
 
 function addSpeedBullet()
