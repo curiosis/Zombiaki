@@ -70,7 +70,7 @@ local creditsPanel = nil
 
 function menuLoad()
   cursorBlood = love.mouse.newCursor("Sprites/cursorBlood.png", 0, 0)
-  letter = G.newImage("Sprites/letter.png")
+  letter = G.newImage("Sprites/letter2.png")
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
   backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
