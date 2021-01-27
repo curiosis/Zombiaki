@@ -38,8 +38,8 @@ function Injure(_player, _playerX, _playerY)
   -- checks if player is near zombie
   function isInjured(zombie)
     -- print("pX: "..self.playerX.." pY: "..self.playerY.." x: "..zombie.x.." y: "..zombie.y)
-    return math.abs(self.playerX - zombie.x) < 5
-    and math.abs(self.playerY - zombie.y) < 5
+    return math.abs(self.playerX - zombie.x) < 30
+    and math.abs(self.playerY - zombie.y) < 30
   end
 
   return self

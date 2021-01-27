@@ -1,4 +1,4 @@
-require "camera"
+require "Camera"
 require "TiledMap"
 
 local G = love.graphics
@@ -14,10 +14,11 @@ player = {
 }
 
 function player:direction()
-  x, y = love.mouse.getPosition()
+  x = M.getX() + camera.x
+  y = M.getY() + camera.y
   return math.atan2(
-  (y - player.y/(getHeightMap()/camera.resH)),
-  (x - player.x/(getWidthMap()/camera.resW))
+  (y - player.y),
+  (x - player.x)
 )
 end
 

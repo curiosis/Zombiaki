@@ -1,5 +1,5 @@
 require "TiledMap"
-require "camera"
+require "Camera"
 require "Player"
 require "Health"
 require "Sprite"
@@ -70,7 +70,7 @@ local creditsPanel = nil
 
 function menuLoad()
   cursorBlood = love.mouse.newCursor("Sprites/cursorBlood.png", 0, 0)
-  letter = G.newImage("Sprites/letter.png")
+  letter = G.newImage("Sprites/letter2.png")
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
   backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
@@ -213,12 +213,14 @@ function creditsDraw()
 end
 
 function startLoad()
-  defaultZombieImg = G.newImage('Sprites/Zombie1.png')
-  fastZombieImg = G.newImage('Sprites/Zombie3.png')
-  strongZombieImg = G.newImage('Sprites/Zombie2.png')
-  shootZombieImg = G.newImage('Sprites/Zombie4.png')
+  print("start")
+  defaultZombieImg = G.newImage('Sprites/zombie1.png')
+  fastZombieImg = G.newImage('Sprites/zombie3.png')
+  strongZombieImg = G.newImage('Sprites/zombie2.png')
+  shootZombieImg = G.newImage('Sprites/zombie4.png')
   bossImage = G.newImage('Sprites/Zombie.png')
-  bulletImg = G.newImage('Sprites/Bullet.jpg')
+  bulletImg = G.newImage('Sprites/Bullet.png')
+  bulletZombieImg = G.newImage('Sprites/Bullet-Zombie.png')
 end
 
 function startDraw()

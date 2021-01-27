@@ -170,6 +170,6 @@ function calcHP(hp, w)
 end
 
 function changeMap()
-  if currentWave >= 6 then map = loadMap("Map/map2") m1 = false m2 = true end
-  if currentWave >= 11 then map = loadMap("Map/map3") m2 = false m3 = true end
+  if currentWave >= 6 and not mA then map = loadMap("Map/map2") m1 = false m2 = true end
+  if currentWave >= 11 and not mA then map = loadMap("Map/map3") m2 = false m3 = true end
 end
