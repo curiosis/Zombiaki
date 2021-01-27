@@ -269,7 +269,7 @@ function startUpdate(dt)
     mainMenuBackgroundAudio:stop()
   end
   player:update(dt)
-  -- moveZombie(dt)
+  moveZombie(dt)
   moveBoss(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
