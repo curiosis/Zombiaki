@@ -263,6 +263,11 @@ function gameOverDraw()
   G.draw(backgroundGameOver,0,0)
 end
 
+function winnerDraw()
+  backgroundWinner = G.newImage('Sprites/Win.png')
+  G.draw(backgroundWinner,0,0)
+end
+
 function startUpdate(dt)
   if(m1 or m2 or m3 or mA) then
     mainMenuBackgroundAudio:stop()
