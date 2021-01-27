@@ -9,8 +9,10 @@ local shop
 local shop2
 local coin
 local lastAlertTime = 0
+local lastWaveTime = 0
 isAlive = true
 isWinner = false
+isNewWave = false
 monets = 0
 alert = ""
 local waveString = "Wave: "
@@ -72,8 +74,21 @@ function UIDraw()
     lg.draw(shop,1500,0)
   end
 
+  if isNewWave then
+    local waveInfo = "WAVE "..wave.currentWave
+    lg.setNewFont('Fonts/Kampung_Zombie.ttf', 100)
+    lg.print(waveInfo,520,320)
+    waveTime = (love.timer.getTime() - lastWaveTime) * 1000
+    if waveTime >= 2000 then
+      lastWaveTime = love.timer.getTime()
+      waveInfo = ""
+      lg.print(waveInfo,520,320)
+    end
+  end
+
   if not isAlive and not isWinner then
     gameOverDraw()
+    wave.currentWave = 0
     if love.keyboard.isDown('space') then
       currentHealth = maxHealth
       health = Health()
