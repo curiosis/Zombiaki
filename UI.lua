@@ -14,6 +14,7 @@ alert = ""
 local waveString = "Wave: "
 local killsString = "Kills: "
 local zombiesString = "Zombies: "
+local font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
 local shop
 local shop2
@@ -29,12 +30,12 @@ function UIDraw(hiden)
     G.draw(shop2, 320, 550)
     G.draw(coin, 1210, 12)
     G.setNewFont(28)
-    G.print(monets, 1150, 20)
-    G.print(alert, 10, 500)
-    G.print(zombiesString .. #zombies, 900, 20)
+    G.print(monets, font, 1150, 20)
+    G.print(alert, font, 10, 500)
+    G.print(zombiesString .. #zombies, font, 900, 20)
     G.setNewFont(40)
-    G.print(waveString .. wave.currentWave, 1000, 650)
-    G.print(killsString .. kills, 50, 650)
+    G.print(waveString .. currentWave, font, 1000, 650)
+    G.print(killsString .. kills, font, 50, 650)
   end
 
   alertResult = (T.getTime() - lastAlertTime) * 1000
