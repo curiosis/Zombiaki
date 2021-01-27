@@ -26,7 +26,6 @@ local screenResW = 1280
 local screenResH = 720
 local playerRot
 local injure
-local letterRead = false
 
 wave = Wave()
 kills = 0
@@ -40,6 +39,7 @@ _G.about = false
 _G.start = false
 _G.arena = false
 _G.credits = false
+_G.letterB = false
 
 _G.map = nil
 _G.m1 = false
@@ -86,9 +86,7 @@ function menuLoad()
   table.insert(buttons, newButton(
   "Story Mode",
   function()
-    map = loadMap("Map/map1")
-    m1 = true
-    start = true
+    letterB = true
   end))
 
   table.insert(buttons, newButton(
@@ -196,10 +194,11 @@ function menuDraw()
 
   end
   G.setColor(1, 1, 1, 1)
-  if m1 and not letterRead then
-    G.draw(letter,0,0)
-    letterRead = true
-  end
+
+end
+
+function letterDraw()
+  G.draw(letter,0,0)
 end
 
 function aboutDraw()
