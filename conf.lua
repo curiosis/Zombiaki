@@ -4,5 +4,5 @@ function love.conf(t)
 	t.window.width = 1280
 	t.window.height = 720
 	t.window.icon = "Sprites/iconGame.png"
-	t.console = true
+	-- t.console = true
 end
