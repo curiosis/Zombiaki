@@ -219,7 +219,8 @@ function startLoad()
   strongZombieImg = G.newImage('Sprites/Zombie2.png')
   shootZombieImg = G.newImage('Sprites/Zombie4.png')
   bossImage = G.newImage('Sprites/Zombie.png')
-  bulletImg = G.newImage('Sprites/Bullet.jpg')
+  bulletImg = G.newImage('Sprites/Bullet.png')
+  bulletZombieImg = G.newImage('Sprites/Bullet-Zombie.png')
 end
 
 function startDraw()
