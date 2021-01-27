@@ -14,9 +14,10 @@ player = {
 }
 
 function player:direction()
+  x, y = love.mouse.getPosition()
   return math.atan2(
-  (M.getY() - player.y/(getHeightMap()/camera.resH)),
-  (M.getX() - player.x/(getWidthMap()/camera.resW))
+  (y - player.y/(getHeightMap()/camera.resH)),
+  (x - player.x/(getWidthMap()/camera.resW))
 )
 end
 

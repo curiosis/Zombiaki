@@ -1,15 +1,19 @@
-MAX_WAVES = 2
 wasBossSpawn = false
+currentWave = 0
 
 function Wave()
-  local self = {
-    currentWave = 0
-  }
+  local self = {}
 
   function self.start()
-    if self.currentWave < MAX_WAVES then
+    if mA then
+      MAX_WAVES = 999999
+    else
+      MAX_WAVES = 15
+    end
+    if currentWave < MAX_WAVES then
       if #zombies == 0 and #bosses == 0 then
-        self.currentWave = self.currentWave + 1
+        currentWave = currentWave + 1
+        changeMap(currentWave)
         self.newWave()
         isNewWave = true
       end
@@ -20,7 +24,7 @@ function Wave()
 
   function self.newWave()
     -- count, img, speed, HP, distance, money
-    local w = self.currentWave
+    local w = currentWave
     isNewWave = true
     -- DEFAULT
     -- spawn default zombies
@@ -102,7 +106,7 @@ function Wave()
   function self.spawnBoss()
     BOSS_HP = 10000
     wasBossSpawn = true
-    spawnBoss(bossImage, 100, BOSS_HP, 200, getWidthMap() / 2, 0)
+    spawnBoss(bossImage, 100, BOSS_HP, 200, getWidthMap() / 2, getHeightMap() + 200)
 
     -- STRONGER
     spawnZombies(10,
@@ -160,4 +164,9 @@ function calcHP(hp, w)
   else
     return hp
   end
+end
+
+function changeMap()
+  if currentWave >= 6 then map = loadMap("Map/map2") m1 = false m2 = true end
+  if currentWave >= 11 then map = loadMap("Map/map3") m2 = false m3 = true end
 end

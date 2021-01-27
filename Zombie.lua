@@ -1,3 +1,7 @@
+local A = love.audio
+local T = love.timer
+local MTH = love.math
+
 zombies = {}
 
 function Zombie(_sprite, _speed, _HP, _money, _canShooting)
@@ -9,8 +13,8 @@ function Zombie(_sprite, _speed, _HP, _money, _canShooting)
     canShooting = _canShooting,
     lastShotTime = 0,
     bullets = {},
-    deathSound = love.audio.newSource("Audio/Zombie-death.mp3", "static"),
-    hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static")
+    deathSound = A.newSource("Audio/Zombie-death.mp3", "static"),
+    hitSound = A.newSource("Audio/Zombie-hit.mp3", "static")
   }
 
   -- init position
@@ -120,25 +124,31 @@ end
 function randomPosition(d)
   local self = { x, y }
   local width = getWidthMap()
-  local r = love.math.random(0, 100) >= 50
+  local r = MTH.random(0, 100) >= 50
   if r then
-    self.x = love.math.random(width + 100 + d, width + 500 + d)
+    self.x = MTH.random(width + 100 + d, width + 500 + d)
   else
-    self.x = love.math.random(-500 - d, -100 - d)
+    self.x = MTH.random(-500 - d, -100 - d)
   end
-  self.y = love.math.random(-400, getHeightMap() - 400)
+  if currentWave < 6 then
+    self.y = MTH.random(-400, getHeightMap() - 400)
+  elseif currentWave < 11 then
+    self.y = MTH.random(-400, getHeightMap())
+  else
+    self.y = MTH.random(400, getHeightMap())
+  end
   return self
 end
 
 -- zombie shoots
 function zombieShot(dt, zombie)
-  local timeOut = (love.timer.getTime() - zombie.lastShotTime) * 1000
+  local timeOut = (T.getTime() - zombie.lastShotTime) * 1000
   if timeOut >= 1500 then
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition(zombie.sprite, true)
     table.insert(zombie.bullets, bullet)
-    zombie.lastShotTime = love.timer.getTime()
+    zombie.lastShotTime = T.getTime()
   end
 end
 

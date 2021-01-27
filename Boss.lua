@@ -1,3 +1,7 @@
+local G = love.graphics
+local A = love.audio
+local MTH = love.math
+
 bosses = {}
 BOSS_HP = 1
 
@@ -9,10 +13,10 @@ function Boss(_sprite, _speed, _HP, _money)
     money = _money,
     lastHitTime = 0,
     shotCounter = 0,
-    hpSprite = love.graphics.newImage('Sprites/HP.png'),
-    hpBorder = love.graphics.newImage('Sprites/HP_border.png'),
-    hitSound = love.audio.newSource("Audio/Zombie-hit.mp3", "static"),
-    initSound = love.audio.newSource("Audio/Zombie-boss-init.mp3", "static")
+    hpSprite = G.newImage('Sprites/HP.png'),
+    hpBorder = G.newImage('Sprites/HP_border.png'),
+    hitSound = A.newSource("Audio/Zombie-hit.mp3", "static"),
+    initSound = A.newSource("Audio/Zombie-boss-init.mp3", "static")
   }
 
   -- init position
@@ -37,8 +41,8 @@ function Boss(_sprite, _speed, _HP, _money)
       self.shotCounter = 0
     end
 
-    local rx = love.math.random(999, 1001) / 1000
-    local ry = love.math.random(999, 1001) / 1000
+    local rx = MTH.random(999, 1001) / 1000
+    local ry = MTH.random(999, 1001) / 1000
 
     -- horizontal movement
     if self.sprite.x <= player.x then
@@ -101,15 +105,15 @@ function Boss(_sprite, _speed, _HP, _money)
     for i = 1, hp + 4 do
       local x = (i - 1) + camera.x
       local y = 6 + camera.y
-      love.graphics.draw(self.hpBorder, x, y)
+      G.draw(self.hpBorder, x, y)
     end
     for i = 1, hp do
       local x = 2 + (i - 1) + camera.x
       local y = 8 + camera.y
-      love.graphics.draw(self.hpSprite, x, y)
+      G.draw(self.hpSprite, x, y)
     end
-    love.graphics.setNewFont(40)
-    love.graphics.print("BOSS", camera.x + camera.resW / 2 - 50, camera.y + 50)
+    G.setNewFont(40)
+    G.print("BOSS", camera.x + camera.resW / 2 - 50, camera.y + 50)
   end
 
   -- sound effects

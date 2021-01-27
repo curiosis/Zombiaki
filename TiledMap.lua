@@ -1,26 +1,33 @@
 _G.pix = 56
 
+local G = love.graphics
+local A = love.audio
 
-
-local fog1 = love.graphics.newImage("Sprites/fog_01.png")
-local fog2 = love.graphics.newImage("Sprites/fog_01.png")
+local fog1 = G.newImage("Sprites/fog_01.png")
+local fog2 = G.newImage("Sprites/fog_01.png")
+local waveMusic = A.newSource("Audio/Epic Battle Music (No Copyright) _.mp3","stream")
 
 function loadMap(path)
   local map = require(path)
   map.quads = {}
 
+  waveMusic:setVolume(0.3)
+  waveMusic:setLooping(true)
+  waveMusic:play()
+
+
   local tileset = map.tilesets[1]
   map.tileset = tileset
 
   if mA then
-    map.image = love.graphics.newImage("Map/TilesetArena.png")
+    map.image = G.newImage("Map/TilesetArena.png")
   else
-    map.image = love.graphics.newImage("Map/Tileset.png")
+    map.image = G.newImage("Map/Tileset.png")
   end
 
   for y=0, (tileset.imageheight / tileset.tileheight) - 1 do
     for x=0, (tileset.imagewidth / tileset.tilewidth) - 1 do
-      local quad = love.graphics.newQuad(
+      local quad = G.newQuad(
       x * tileset.tilewidth,
       y * tileset.tileheight,
       tileset.tilewidth,
@@ -33,7 +40,10 @@ function loadMap(path)
 end
 
 function map:draw()
-  love.graphics.setColor(1, 1, 1, 1)
+
+
+
+  G.setColor(1, 1, 1, 1)
   for i, layer in ipairs(self.layers) do
     for y=0, layer.height - 1 do
       for x=0, layer.width - 1 do
@@ -44,12 +54,7 @@ function map:draw()
           local xx = x * self.tileset.tilewidth
           local yy = y * self.tileset.tileheight
 
-          love.graphics.draw(
-          self.image,
-          quad,
-          xx,
-          yy
-        )
+          G.draw(self.image,quad,xx,yy)
       end
     end
   end
@@ -59,39 +64,21 @@ return map
 end
 
 function drawFog()
-  love.graphics.draw(
-  fog1,
-  100,
-  50
-)
-love.graphics.draw(
-fog2,
-500,
-0
-)
-love.graphics.draw(
-fog2,
-800,
-450
-)
+  G.draw(fog1,100,50)
+  G.draw(fog2,500,0)
+  G.draw(fog2,800,450)
 end
 
 function getWidthMap()
-  if m1 or m2 then
-    return 30*pix
-  elseif m3 then
-    return 35*pix
-  elseif mA then
-    return 40*pix
+  if m1 or m2 then return 30*pix
+  elseif m3 then return 35*pix
+  elseif mA then return 40*pix
   end
 end
 
 function getHeightMap()
-  if m1 or m2 then
-    return 20*pix
-  elseif m3 then
-    return 25*pix
-  elseif mA then
-    return 40*pix
+  if m1 or m2 then return 20*pix
+  elseif m3 then return 25*pix
+  elseif mA then return 40*pix
   end
 end

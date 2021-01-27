@@ -2,11 +2,15 @@ speedBullet = 500
 currentTimeOut = 500
 bullets = {}
 
+local A = love.audio
+local M = love.mouse
+local T = love.timer
+
 function Bullet (_sprite)
   local self = {
     sprite = _sprite,
     isVisible = true,
-    shotSound = love.audio.newSource("Audio/Shot.mp3", "static")
+    shotSound = A.newSource("Audio/Shot.mp3", "static")
   }
 
   -- init position
@@ -15,8 +19,8 @@ function Bullet (_sprite)
     self.sprite.y = sprite.y
 
     -- if player shots
-    local mX = love.mouse.getX() + camera.x
-    local mY = love.mouse.getY() + camera.y
+    local mX = M.getX() + camera.x
+    local mY = M.getY() + camera.y
 
     -- if zombie shots
     if isZombie then
@@ -66,14 +70,14 @@ function Bullet (_sprite)
 end
 
 function shot(dt)
-  local timeOut = (love.timer.getTime() - lastShotTime) * 1000
-  if love.mouse.isDown(1) and timeOut >= currentTimeOut then
+  local timeOut = (T.getTime() - lastShotTime) * 1000
+  if M.isDown(1) and timeOut >= currentTimeOut then
     Bullet().playSoundEffectShot()
     local bulletSprite = Sprite(bulletImg)
     local bullet = Bullet(bulletSprite)
     bullet.initPosition(player)
     table.insert(bullets, bullet)
-    lastShotTime = love.timer.getTime()
+    lastShotTime = T.getTime()
   end
 
   for i = 1, #bullets do
