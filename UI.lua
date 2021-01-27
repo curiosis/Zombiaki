@@ -13,6 +13,7 @@ isWinner = false
 isNewWave = false
 monets = 0
 alert = ""
+waveInfo = ""
 local waveString = "Wave: "
 local killsString = "Kills: "
 local zombiesString = "Zombies: "
@@ -38,6 +39,8 @@ function UIDraw(hiden)
     G.setNewFont(40)
     G.print(waveString .. currentWave, font, 1000, 650)
     G.print(killsString .. kills, font, 50, 650)
+    G.setNewFont(200)
+    G.print(waveInfo, font, 520, 320)
   end
 
   alertResult = (T.getTime() - lastAlertTime) * 1000
@@ -51,23 +54,22 @@ function UIDraw(hiden)
   else
     G.draw(shop,1500,0)
   end
-  if isNewWave then
-    local waveInfo = "WAVE "..currentWave
-    G.setNewFont(100)
-    G.print(waveInfo, font, 520,320)
-    waveTime = (love.timer.getTime() - lastWaveTime) * 1000
-    if waveTime >= 2000 then
-      lastWaveTime = love.timer.getTime()
-      waveInfo = ""
-      G.print(waveInfo,520,320)
-    end
+
+  waveTime = (T.getTime() - lastWaveTime) * 1000
+  if waveTime >= 7000 then
+    lastWaveTime = T.getTime()
+    waveInfo = ""
   end
+
 
   if not isAlive and not isWinner then
     gameOverDraw()
     if K.isDown('space') then
       love.event.quit('restart')
     end
+  end
+  if isAlive and BOSS_HP == 0 then
+    winnerDraw()
   end
 end
 

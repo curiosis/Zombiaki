@@ -15,7 +15,6 @@ function Wave()
         currentWave = currentWave + 1
         changeMap(currentWave)
         self.newWave()
-        isNewWave = true
       end
     elseif not wasBossSpawn and #zombies == 0 and #bosses == 0 then
       self.spawnBoss()
@@ -26,6 +25,7 @@ function Wave()
     -- count, img, speed, HP, distance, money
     local w = currentWave
     isNewWave = true
+    waveInfo = "WAVE " .. currentWave
     -- DEFAULT
     -- spawn default zombies
     spawnZombies(
