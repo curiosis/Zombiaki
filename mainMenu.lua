@@ -26,6 +26,7 @@ local screenResW = 1280
 local screenResH = 720
 local playerRot
 local injure
+local letterRead = false
 
 wave = Wave()
 kills = 0
@@ -56,7 +57,7 @@ function newButton(text, fn)
     last = false
   }
 end
-
+local letter = nil
 local buttons = {}
 local font = nil
 local mainMenuBackgroundAudio = nil
@@ -66,6 +67,7 @@ local aboutPanel = nil
 local creditsPanel = nil
 
 function menuLoad()
+  letter = G.newImage("Sprites/letter.png")
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
   backgroundMM = G.newImage('Sprites/MainMenuBackground.png')
@@ -194,6 +196,10 @@ function menuDraw()
 
   end
   G.setColor(1, 1, 1, 1)
+  if m1 and not letterRead then
+    G.draw(letter,0,0)
+    letterRead = true
+  end
 end
 
 function aboutDraw()

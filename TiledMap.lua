@@ -5,6 +5,7 @@ local G = love.graphics
 local fog1 = G.newImage("Sprites/fog_01.png")
 local fog2 = G.newImage("Sprites/fog_01.png")
 
+
 function loadMap(path)
   local map = require(path)
   map.quads = {}
@@ -33,6 +34,9 @@ function loadMap(path)
 end
 
 function map:draw()
+
+
+
   G.setColor(1, 1, 1, 1)
   for i, layer in ipairs(self.layers) do
     for y=0, layer.height - 1 do
