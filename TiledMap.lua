@@ -1,14 +1,20 @@
 _G.pix = 56
 
 local G = love.graphics
+local A = love.audio
 
 local fog1 = G.newImage("Sprites/fog_01.png")
 local fog2 = G.newImage("Sprites/fog_01.png")
-
+local waveMusic = A.newSource("Audio/Epic Battle Music (No Copyright) _.mp3","stream")
 
 function loadMap(path)
   local map = require(path)
   map.quads = {}
+
+  waveMusic:setVolume(0.3)
+  waveMusic:setLooping(true)
+  waveMusic:play()
+
 
   local tileset = map.tilesets[1]
   map.tileset = tileset
