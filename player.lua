@@ -1,4 +1,4 @@
-require "camera"
+require "Camera"
 require "TiledMap"
 
 local G = love.graphics

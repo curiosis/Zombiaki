@@ -1,4 +1,4 @@
-require "mainMenu"
+require "MainMenu"
 require "Shop"
 require "UI"
 
