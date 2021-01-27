@@ -19,9 +19,11 @@ local shop
 local shop2
 local coin
 local dark
+local cursorGun
 
 function UIDraw(hiden)
   G.draw(dark,0,0)
+  love.mouse.setCursor(cursorGun)
   if not hiden then
     health.drawHearts()
     G.draw(shop2, 320, 550)
@@ -60,5 +62,6 @@ function UILoad()
   shop2 = G.newImage('Sprites/shop2.png')
   coin = G.newImage('Sprites/coin.png')
   dark = G.newImage('Map/Darker.png')
+  cursorGun = love.mouse.newCursor("Sprites/cursorGun.png", 25, 25)
   G.setNewFont(28)
 end

@@ -8,6 +8,7 @@ require "Injure"
 require "Bullet"
 require "Wave"
 require "Boss"
+require "UI"
 
 -- local player
 local playerX
@@ -26,6 +27,7 @@ local screenResW = 1280
 local screenResH = 720
 local playerRot
 local injure
+local cursorBlood
 
 wave = Wave()
 kills = 0
@@ -67,6 +69,7 @@ local aboutPanel = nil
 local creditsPanel = nil
 
 function menuLoad()
+  cursorBlood = love.mouse.newCursor("Sprites/cursorBlood.png", 0, 0)
   letter = G.newImage("Sprites/letter.png")
   font = G.newFont("Fonts/Kampung_Zombie.ttf", 32)
 
@@ -127,7 +130,7 @@ function menuLoad()
 end
 
 function menuDraw()
-
+  love.mouse.setCursor(cursorBlood)
   G.draw(backgroundMM,0,0)
 
   local ww = G.getWidth()
@@ -262,8 +265,11 @@ function gameOverDraw()
 end
 
 function startUpdate(dt)
+  if(m1 or m2 or m3 or mA) then
+    mainMenuBackgroundAudio:stop()
+  end
   player:update(dt)
-  moveZombie(dt)
+  --moveZombie(dt)
   moveBoss(dt)
   injure = Injure(player, player.x, player.y)
   injure.touchZombie()
