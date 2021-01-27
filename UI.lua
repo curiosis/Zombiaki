@@ -33,7 +33,7 @@ function UIDraw(hiden)
     G.print(alert, 10, 500)
     G.print(zombiesString .. #zombies, 900, 20)
     G.setNewFont(40)
-    G.print(waveString .. currentWave, 1000, 650)
+    G.print(waveString .. wave.currentWave, 1000, 650)
     G.print(killsString .. kills, 50, 650)
   end
 
